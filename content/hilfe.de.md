@@ -1,24 +1,19 @@
 # Hilfe
 
-## Was macht PitchTimer?
+## Wie benutze ich den PitchTimer?
 
-Beschreibe den Zweck der Anwendung in wenigen Sätzen.
+Der PitchTimer hilft dir dabei, deine Präsentationen, insbesondere Elevator Pitches, zeitlich perfekt abzustimmen.
 
-## Schnellstart
+1. **Zeit auswählen:** Wähle aus den Vorgaben (z.B. 60 Sekunden) oder stelle eine eigene Zeit ein.
+2. **Notizen anlegen:** Schreibe deine wichtigsten Stichpunkte in das Notizfeld. Diese werden automatisch in deinem Browser gespeichert.
+3. **Starten:** Klicke auf "Start". Es gibt einen kurzen Countdown (3 Sekunden), bevor die eigentliche Zeit abläuft.
+4. **Präsentationsmodus:** Nutze den Button "Vollbild", um Ablenkungen zu minimieren. Im Präsentationsmodus fokussierst du dich ganz auf den Timer und deine Notizen.
 
-1. Beschreibe den ersten Schritt.
-2. Beschreibe die zentrale Bearbeitung.
-3. Beschreibe Speichern oder Exportieren.
+## Export & Import
+Du kannst deine Notizen jederzeit über den **Speichern**-Button als `.txt`-Datei herunterladen und über den **Öffnen**-Button wieder laden.
 
-## Projekte speichern und öffnen
-
-Erkläre Autospeicherung, Projektdateien, Import, Export und die Grenzen der
-Wiederherstellung.
+## Verlauf
+Deine absolvierten Pitches werden im Verlauf protokolliert, damit du deine Fortschritte und tatsächlichen Zeiten überprüfen kannst. Auch diese Daten bleiben lokal auf deinem Gerät.
 
 ## Daten löschen
-
-Erkläre, wie lokal gespeicherte Daten vollständig gelöscht werden.
-
-## Unterstützte Geräte und Dateien
-
-Dokumentiere Browser, Dateitypen, Größenlimits und bekannte Einschränkungen.
+Du kannst jederzeit den "Verlauf löschen" Button nutzen. Außerdem werden alle Daten entfernt, wenn du deine Browser-Daten (LocalStorage) löschst.

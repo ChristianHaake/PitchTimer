@@ -2,11 +2,11 @@
 
 ## Zweck
 
-Beschreibe den Bildungszweck und die Zielgruppe.
+Der **PitchTimer** ist ein Open-Source-Projekt für das Training von Elevator Pitches und Kurzpräsentationen. Die Simulation dient ausschließlich dem Bildungszweck und hilft dir, deine Präsentationen fokussiert auf die Zeit abzustimmen.
 
 ## Funktionsweise
 
-Erkläre die wichtigsten Funktionen und die lokale Verarbeitung.
+PitchTimer läuft vollständig lokal in deinem Browser. Es gibt keine Anmeldung, keine Benutzerkonten und keine Server-Kommunikation. Alle Notizen und Verlaufsdaten werden sicher in deinem Browser (LocalStorage) gespeichert. Du kannst deine Daten jederzeit exportieren (Speichern) und bei Bedarf wieder importieren (Öffnen).
 
 ## Open Source
 
@@ -16,4 +16,5 @@ Die Software steht unter der GNU General Public License v3.0 only.
 
 ## Verantwortlich
 
-Ergänze Projektverantwortung und Kontakt.
+Christian Haake
+https://github.com/ChristianHaake

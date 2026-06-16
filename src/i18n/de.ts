@@ -6,6 +6,7 @@ export const de = {
   'app.privacy': 'Datenschutz',
   'app.imprint': 'Impressum',
   'app.source': 'Quellcode',
+  'app.coffee': 'Kaffee spendieren',
 
   // Home / General
   'home.title': 'Elevator Pitch üben',
@@ -34,6 +35,8 @@ export const de = {
   // Notes Field
   'notes.title': 'Meine Pitch-Notizen',
   'notes.placeholder': 'Schreibe hier deine Stichpunkte auf...',
+  'notes.save': 'Speichern',
+  'notes.open': 'Öffnen',
 
   // History
   'history.show': 'Verlauf einblenden',

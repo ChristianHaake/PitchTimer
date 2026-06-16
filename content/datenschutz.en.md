@@ -1,41 +1,16 @@
-> **Note:** For legal reasons, the binding Privacy Policy is only available in German.
+# Privacy Policy
 
-# Privacy Policy (Datenschutz)
+This software is an open-source project designed for educational use.
 
-Status: 2026-06-16
+Protecting your data is our highest priority. That is why PitchTimer is designed so that **no** personal data is collected, processed, or transferred to servers.
 
-> Template: This text must be adapted to the actual application and hosting and verified by the operator before publication.
+## 1. Local Storage
+All inputs, notes, and history entries you make in PitchTimer remain exclusively local on your device. There is no database, no server, and no data exchange with third parties.
 
-## Controller
+Data is stored using your browser's `LocalStorage` technology. If you clear your browser data, all PitchTimer data is completely removed.
 
-Christian Haake
+## 2. No Cookies and No Tracking
+We do not use cookies. No web analytics tools (e.g., Google Analytics) are used. We do not track your user behavior.
 
-[Insert address]
-
-Email: [Insert email]
-
-## Hosting
-
-The application is provided via Cloudflare Pages. Upon access, the hosting provider processes technically necessary connection data, e.g., IP address, time, requested file, and browser details.
-
-Add legal basis, storage duration, data processing agreement, and a link to the hosting provider's privacy policy.
-
-## Processing of Content
-
-Describe exactly whether entered texts and uploaded files are processed exclusively in the browser or leave the device.
-
-## Local Storage
-
-List all used `localStorage` and IndexedDB entries with their purpose and deletion options.
-
-## Cookies and Analytics
-
-Document cookies, hosting analytics, and other services. If none are used, state this only if verified by production.
-
-## Deletion
-
-Explain how users can delete locally stored data.
-
-## Data Subject Rights
-
-Add the required information on the right to information, rectification, erasure, restriction, objection, and the right to lodge a complaint.
+## 3. Web Hosting
+The static website is delivered via Cloudflare Pages or Github Pages. During the delivery of files (HTML, CSS, JS), the hosting provider typically temporarily stores connection data (such as IP address, date, and time of access) in log files to ensure technical security. We do not have access to these log files.

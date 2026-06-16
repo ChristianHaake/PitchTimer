@@ -1,48 +1,16 @@
-# Datenschutz
+# Datenschutzhinweise
 
-Stand: 2026-06-16
+Diese Software ist ein Open-Source-Projekt für den Einsatz im Bildungsbereich.
 
-> Vorlage: Dieser Text muss an die tatsächliche Anwendung und das konkrete
-> Hosting angepasst und vor Veröffentlichung durch den Betreiber geprüft
-> werden.
+Der Schutz deiner Daten hat oberste Priorität. Deshalb ist PitchTimer so konzipiert, dass **keine** personenbezogenen Daten erhoben, verarbeitet oder an Server übertragen werden.
 
-## Verantwortlicher
+## 1. Lokale Speicherung
+Alle Eingaben, Notizen und Verlaufseinträge, die du in PitchTimer vornimmst, verbleiben ausschließlich lokal auf deinem Gerät. Es gibt keine Datenbank, keinen Server und keinen Datenaustausch mit Dritten.
 
-Christian Haake
+Die Speicherung erfolgt über die `LocalStorage`-Technologie deines Browsers. Wenn du deine Browserdaten löschst, werden auch alle Daten von PitchTimer restlos entfernt.
 
-[Adresse einfügen]
+## 2. Keine Cookies und kein Tracking
+Wir setzen keine Cookies ein. Es werden keine Web-Analyse-Tools (wie z. B. Google Analytics) verwendet. Wir zeichnen dein Nutzerverhalten nicht auf.
 
-E-Mail: [E-Mail einfügen]
-
-## Hosting
-
-Die Anwendung wird über Cloudflare Pages bereitgestellt. Beim Aufruf
-verarbeitet der Hosting-Anbieter technisch erforderliche Verbindungsdaten,
-beispielsweise IP-Adresse, Zeitpunkt, angeforderte Datei und Browserangaben.
-
-Ergänze Rechtsgrundlage, Speicherdauer, Auftragsverarbeitung und einen Link zur
-Datenschutzerklärung des Hosting-Anbieters.
-
-## Verarbeitung von Inhalten
-
-Beschreibe exakt, ob eingegebene Texte und hochgeladene Dateien ausschließlich
-im Browser verarbeitet werden oder das Gerät verlassen.
-
-## Lokale Speicherung
-
-Liste alle verwendeten `localStorage`- und IndexedDB-Einträge mit Zweck und
-Löschmöglichkeit auf.
-
-## Cookies und Analyse
-
-Dokumentiere Cookies, Hosting-Analyse und weitere Dienste. Falls keine
-eingesetzt werden, sage dies nur, wenn es durch die Produktion geprüft wurde.
-
-## Löschung
-
-Erkläre, wie Nutzer lokal gespeicherte Daten löschen können.
-
-## Rechte betroffener Personen
-
-Ergänze die erforderlichen Informationen zu Auskunft, Berichtigung, Löschung,
-Einschränkung, Widerspruch und Beschwerderecht.
+## 3. Webhosting
+Die Bereitstellung der statischen Website erfolgt über Cloudflare Pages oder Github Pages. Bei der reinen Auslieferung der Dateien (HTML, CSS, JS) werden vom Hosting-Provider üblicherweise Verbindungsdaten (wie IP-Adresse, Datum und Uhrzeit des Zugriffs) kurzfristig in Logfiles gespeichert, um die technische Sicherheit zu gewährleisten. Wir haben keinen Zugriff auf diese Logfiles.

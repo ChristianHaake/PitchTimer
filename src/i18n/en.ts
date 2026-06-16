@@ -6,6 +6,7 @@ export const en = {
   'app.privacy': 'Privacy',
   'app.imprint': 'Imprint',
   'app.source': 'Source Code',
+  'app.coffee': 'Buy me a coffee',
 
   // Home / General
   'home.title': 'Practice Elevator Pitch',
@@ -33,7 +34,9 @@ export const en = {
 
   // Notes Field
   'notes.title': 'My Pitch Notes',
-  'notes.placeholder': 'Jot down your bullet points here...',
+  'notes.placeholder': 'Write your bullet points here...',
+  'notes.save': 'Save',
+  'notes.open': 'Open',
 
   // History
   'history.show': 'Show History',

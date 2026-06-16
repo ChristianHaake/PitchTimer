@@ -172,13 +172,16 @@ function App() {
         </Routes>
       </main>
 
-      <footer className="app-footer">
+      <footer className="app-footer hide-in-presentation">
         <Link to="/hilfe">{t('app.help')}</Link>
         <Link to="/ueber">{t('app.about')}</Link>
         <Link to="/datenschutz">{t('app.privacy')}</Link>
         <Link to="/impressum">{t('app.imprint')}</Link>
         <a href="https://github.com/ChristianHaake/PitchTimer" target="_blank" rel="noopener noreferrer">
           {t('app.source')}
+        </a>
+        <a href="https://buymeacoffee.com/christianhaake" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          ☕ {t('app.coffee')}
         </a>
       </footer>
     </Router>

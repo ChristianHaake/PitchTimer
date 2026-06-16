@@ -2,11 +2,11 @@
 
 ## Purpose
 
-Describe the educational purpose and target audience.
+**PitchTimer** is an open-source project designed for training elevator pitches and short presentations. This simulation is strictly for educational purposes and helps you perfectly align your presentation timing.
 
 ## How it works
 
-Explain the most important features and local processing.
+PitchTimer runs entirely locally in your browser. There is no sign-up, no user accounts, and no server communication. All notes and history data are securely stored in your browser's LocalStorage. You can export your data at any time (Save) and import it when needed (Open).
 
 ## Open Source
 
@@ -16,4 +16,5 @@ The software is licensed under the GNU General Public License v3.0 only.
 
 ## Responsibility
 
-Add project responsibility and contact details.
+Christian Haake
+https://github.com/ChristianHaake

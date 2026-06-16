@@ -1,24 +1,15 @@
 # Impressum
 
-> Vorlage: Vor Veröffentlichung mit den tatsächlichen Betreiberangaben
-> ausfüllen und rechtlich prüfen.
-
-## Angaben gemäß § 5 DDG
+## Angaben gemäß § 5 TMG
 
 Christian Haake
-
-[Adresse einfügen]
+(Anschrift bitte bei Bedarf eintragen)
 
 ## Kontakt
+Projekt-Repository: https://github.com/ChristianHaake/PitchTimer
 
-E-Mail: [E-Mail einfügen]
+## Haftung für Inhalte
+Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
 
-## Verantwortlich für den Inhalt
-
-Christian Haake
-
-[Adresse einfügen]
-
-## Haftung und Urheberrecht
-
-Ergänze nur rechtlich geprüfte, für dieses Angebot zutreffende Angaben.
+## Urheberrecht
+Diese Web-App steht unter einer Open-Source Lizenz (GNU General Public License v3.0 only).
