@@ -58,13 +58,27 @@ function Home() {
   };
 
   return (
-    <div className="surface-panel" style={{ maxWidth: '600px', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--spacing-6)' }}>
-        <h2 style={{ margin: 0 }} className="hide-in-presentation">{t('home.title')}</h2>
-        <button onClick={toggleFullscreen} className="btn-outline hide-in-presentation" style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-sm)' }}>
-          {isFullscreen ? t('home.exitFullscreen') : t('home.fullscreen')}
-        </button>
+    <>
+      <div className="educational-banner hide-in-presentation">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
+          <svg xmlns="http://www.w3.org/0000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+          <strong>{t('banner.education')}</strong>
+        </div>
+        <Link to="/ueber">{t('banner.responsibility')}</Link>
       </div>
+
+      <div className="hero-section hide-in-presentation">
+        <div className="hero-subhead">{t('hero.subhead')}</div>
+        <h1 className="hero-headline">{t('hero.headline')}</h1>
+        <p className="hero-description">{t('hero.description')}</p>
+      </div>
+
+      <div className="surface-panel" style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: 'var(--spacing-6)' }}>
+          <button onClick={toggleFullscreen} className="btn-outline hide-in-presentation" style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-sm)' }}>
+            {isFullscreen ? t('home.exitFullscreen') : t('home.fullscreen')}
+          </button>
+        </div>
       
       <TimeSelector 
         timeMode={timeMode} 
@@ -94,7 +108,8 @@ function Home() {
       
       <HistoryStats history={history} onClear={clearHistory} />
       
-    </div>
+      </div>
+    </>
   );
 }
 
@@ -103,32 +118,47 @@ function App() {
 
   return (
     <Router>
-      <header className="app-header">
-        <div>
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <h1>PitchTimer</h1>
-          </Link>
-        </div>
-        <div style={{ display: 'flex', gap: 'var(--spacing-4)', alignItems: 'center' }}>
-          <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)' }} className="hide-in-presentation">
-            {t('app.localData')}
+      <header className="app-header hide-in-presentation">
+        <div className="header-logo-container">
+          <div className="header-logo-icon">
+            <svg xmlns="http://www.w3.org/0000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
           </div>
-          <div style={{ display: 'flex', gap: 'var(--spacing-2)' }}>
+          <div className="header-title-group">
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <h1>PitchTimer</h1>
+            </Link>
+            <div className="header-subtitle">{t('header.subtitle')}</div>
+          </div>
+        </div>
+        
+        <div className="header-actions">
+          <div className="badge-success">
+            <svg xmlns="http://www.w3.org/0000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            {t('header.localData')}
+          </div>
+          
+          <div className="segmented-control">
             <button 
               onClick={() => setLanguage('de')} 
-              className={language === 'de' ? 'btn-primary' : 'btn-outline'}
-              style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-xs)' }}
+              className={language === 'de' ? 'active' : ''}
             >
               DE
             </button>
             <button 
               onClick={() => setLanguage('en')} 
-              className={language === 'en' ? 'btn-primary' : 'btn-outline'}
-              style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-xs)' }}
+              className={language === 'en' ? 'active' : ''}
             >
               EN
             </button>
           </div>
+
+          <Link to="/ueber" className="header-link">
+            <svg xmlns="http://www.w3.org/0000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            {t('header.teachers')}
+          </Link>
         </div>
       </header>
 

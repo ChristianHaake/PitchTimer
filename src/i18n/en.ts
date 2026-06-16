@@ -12,6 +12,16 @@ export const en = {
   'home.fullscreen': 'Fullscreen',
   'home.exitFullscreen': 'Exit Fullscreen',
 
+  // Header & Hero
+  'header.subtitle': 'Elevator Pitch Training',
+  'header.localData': '✓ Content stays local',
+  'header.teachers': 'For Teachers',
+  'banner.education': 'This simulation is strictly for educational purposes.',
+  'banner.responsibility': 'Responsible Use',
+  'hero.subhead': 'LOCAL. FOCUSED. DISTRACTION-FREE.',
+  'hero.headline': 'Perfect your elevator pitch.',
+  'hero.description': 'Train your presentation skills with exact timing. In presentation mode, you focus entirely on your notes. No sign-up and no upload required.',
+
   // Timer
   'timer.start': 'Start',
   'timer.pause': 'Pause',

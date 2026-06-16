@@ -209,3 +209,161 @@ body.presentation-mode .timer-display {
   font-size: 12vw !important; /* Huge responsive text in presentation mode */
 }
 
+/* UI Overhaul specific utilities */
+
+/* Header layout */
+.header-logo-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.header-logo-icon {
+  background-color: var(--color-primary);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-logo-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.header-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-title-group h1 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+.header-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.2;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+/* Badges and segmented controls */
+.badge-success {
+  background-color: #d1fae5; /* Light green */
+  color: #065f46; /* Dark green text */
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: 9999px; /* Pill shape */
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.segmented-control {
+  display: flex;
+  background-color: var(--color-bg-workspace);
+  border-radius: 9999px;
+  padding: 4px;
+}
+
+.segmented-control button {
+  border: none;
+  background: transparent;
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: 9999px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  transition: all 0.2s;
+}
+
+.segmented-control button.active {
+  background-color: var(--color-primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.header-link:hover {
+  text-decoration: underline;
+}
+
+/* Educational Banner */
+.educational-banner {
+  background-color: #fef3c7; /* Amber/yellow light */
+  color: #92400e; /* Dark amber text */
+  padding: var(--spacing-3) var(--spacing-6);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+}
+
+.educational-banner a {
+  color: #92400e;
+  font-weight: var(--font-weight-bold);
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero-section {
+  padding: var(--spacing-8) 0;
+  max-width: 800px;
+}
+
+.hero-subhead {
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-4);
+}
+
+.hero-headline {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-6);
+}
+
+.hero-description {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+@media (max-width: 640px) {
+  .hero-headline {
+    font-size: 2.5rem;
+  }
+}

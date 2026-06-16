@@ -12,6 +12,16 @@ export const de = {
   'home.fullscreen': 'Vollbild',
   'home.exitFullscreen': 'Vollbild beenden',
 
+  // Header & Hero
+  'header.subtitle': 'Elevator Pitch Training',
+  'header.localData': '✓ Inhalte bleiben lokal',
+  'header.teachers': 'Für Lehrkräfte',
+  'banner.education': 'Diese Simulation dient ausschließlich dem Bildungszweck.',
+  'banner.responsibility': 'Verantwortungsvoller Einsatz',
+  'hero.subhead': 'LOKAL. FOKUSSIERT. ABLENKUNGSFREI.',
+  'hero.headline': 'Perfektioniere deinen Elevator Pitch.',
+  'hero.description': 'Trainiere deine Präsentationsfähigkeit mit exaktem Timing. Im Präsentationsmodus fokussierst du ganz auf deine Notizen. Ohne Anmeldung und ohne Upload.',
+
   // Timer
   'timer.start': 'Start',
   'timer.pause': 'Pause',
