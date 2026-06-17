@@ -404,3 +404,76 @@ body.presentation-mode .timer-display {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Tiptap Editor Styles */
+.tiptap-container {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-bg-workspace);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tiptap-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+  padding: var(--spacing-2);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg-surface);
+}
+
+.tiptap-toolbar button {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-1);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.tiptap-toolbar button:hover {
+  background-color: var(--color-bg-workspace);
+  color: var(--color-text-primary);
+}
+
+.tiptap-toolbar button.is-active {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.tiptap-toolbar .toolbar-divider {
+  width: 1px;
+  background-color: var(--color-border);
+  margin: 0 var(--spacing-1);
+}
+
+.ProseMirror {
+  padding: var(--spacing-3);
+  min-height: 200px;
+  outline: none;
+  color: var(--color-text-primary);
+}
+
+.ProseMirror p {
+  margin-bottom: var(--spacing-2);
+}
+
+.ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+
+.ProseMirror h1, .ProseMirror h2 {
+  margin-top: var(--spacing-4);
+  margin-bottom: var(--spacing-2);
+}
+
+.ProseMirror ul, .ProseMirror ol {
+  padding-left: var(--spacing-6);
+  margin-bottom: var(--spacing-2);
+}
