@@ -4,7 +4,7 @@
 
 Der PitchTimer hilft dir dabei, deine Präsentationen, insbesondere Elevator Pitches, zeitlich perfekt abzustimmen.
 
-1. **Zeit auswählen:** Wähle aus den Vorgaben (z.B. 60 Sekunden) oder stelle eine eigene Zeit ein.
+1. **Zeit auswählen:** Wähle aus den Vorgaben (z. B. 30, 60, 90 oder 120 Sekunden).
 2. **Notizen anlegen:** Schreibe deine wichtigsten Stichpunkte in das Notizfeld. Diese werden automatisch in deinem Browser gespeichert.
 3. **Starten:** Klicke auf "Start". Es gibt einen kurzen Countdown (3 Sekunden), bevor die eigentliche Zeit abläuft.
 4. **Präsentationsmodus:** Nutze den Button "Vollbild", um Ablenkungen zu minimieren. Im Präsentationsmodus fokussierst du dich ganz auf den Timer und deine Notizen.

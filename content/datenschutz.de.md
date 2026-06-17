@@ -2,10 +2,10 @@
 
 Diese Software ist ein Open-Source-Projekt für den Einsatz im Bildungsbereich.
 
-Der Schutz deiner Daten hat oberste Priorität. Deshalb ist PitchTimer so konzipiert, dass **keine** personenbezogenen Daten erhoben, verarbeitet oder an Server übertragen werden.
+Der Schutz deiner Daten hat hohe Priorität. PitchTimer verarbeitet deine Eingaben lokal im Browser und überträgt sie nicht an den Betreiber oder an Drittserver.
 
 ## 1. Lokale Speicherung
-Alle Eingaben, Notizen und Verlaufseinträge, die du in PitchTimer vornimmst, verbleiben ausschließlich lokal auf deinem Gerät. Es gibt keine Datenbank, keinen Server und keinen Datenaustausch mit Dritten.
+Alle Eingaben, Notizen und Verlaufseinträge, die du in PitchTimer vornimmst, verbleiben lokal auf deinem Gerät. Es gibt keine Datenbank für Nutzerinhalte und keinen Upload deiner Inhalte an den Betreiber.
 
 Die Speicherung erfolgt über die `LocalStorage`-Technologie deines Browsers. Wenn du deine Browserdaten löschst, werden auch alle Daten von PitchTimer restlos entfernt.
 

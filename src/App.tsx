@@ -61,7 +61,7 @@ function Home() {
     <>
       <div className="educational-banner hide-in-presentation">
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
-          <svg xmlns="http://www.w3.org/0000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/0000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
           <strong>{t('banner.education')}</strong>
         </div>
         <Link to="/ueber">{t('banner.responsibility')}</Link>
@@ -83,7 +83,7 @@ function Home() {
       <TimeSelector 
         timeMode={timeMode} 
         setTimeMode={setTimeMode} 
-        disabled={isRunning} 
+        disabled={isRunning || isPreparing} 
       />
 
       <div className="timer-wrapper" style={{ padding: 'var(--spacing-6) 0', borderTop: '1px solid var(--color-border)', borderBottom: '1px solid var(--color-border)' }}>
@@ -92,7 +92,7 @@ function Home() {
           isPreparing={isPreparing} 
           prepTimeLeft={prepTimeLeft} 
         />
-        <ProgressBar progress={progress} />
+        <ProgressBar progress={progress} label={t('timer.progress')} />
         <TimerControls 
           isRunning={isRunning} 
           isPreparing={isPreparing}
@@ -121,7 +121,7 @@ function App() {
       <header className="app-header hide-in-presentation">
         <div className="header-logo-container">
           <div className="header-logo-icon">
-            <svg xmlns="http://www.w3.org/0000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/0000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
@@ -136,7 +136,7 @@ function App() {
         
         <div className="header-actions">
           <div className="badge-success">
-            <svg xmlns="http://www.w3.org/0000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/0000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
             {t('header.localData')}
           </div>
           
@@ -144,19 +144,21 @@ function App() {
             <button 
               onClick={() => setLanguage('de')} 
               className={language === 'de' ? 'active' : ''}
+              aria-pressed={language === 'de'}
             >
               DE
             </button>
             <button 
               onClick={() => setLanguage('en')} 
               className={language === 'en' ? 'active' : ''}
+              aria-pressed={language === 'en'}
             >
               EN
             </button>
           </div>
 
           <Link to="/ueber" className="header-link">
-            <svg xmlns="http://www.w3.org/0000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/0000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
             {t('header.teachers')}
           </Link>
         </div>
@@ -181,7 +183,7 @@ function App() {
           {t('app.source')}
         </a>
         <a href="https://buymeacoffee.com/christianhaake" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          ☕ {t('app.coffee')}
+          {t('app.coffee')}
         </a>
       </footer>
     </Router>

@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
 import { de } from './de';
 import { en } from './en';
 
@@ -33,13 +33,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = language;
   }, [language]);
 
-  const t = (key: keyof Translations, ...args: string[]) => {
+  const t = useCallback((key: keyof Translations, ...args: string[]) => {
     let text = translations[language][key] || translations['de'][key] || key;
     args.forEach((arg, i) => {
       text = text.replace(`{${i}}`, arg);
     });
     return text;
-  };
+  }, [language]);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>

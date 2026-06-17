@@ -1,18 +1,34 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslation } from '../i18n';
 
 const NOTES_STORAGE_KEY = 'pitchtimer_notes';
+const MAX_NOTES_FILE_SIZE_BYTES = 100 * 1024;
 
 export function NotesField() {
   const { t } = useTranslation();
-  const [notes, setNotes] = useState(() => localStorage.getItem(NOTES_STORAGE_KEY) || '');
+  const [notes, setNotes] = useState(() => {
+    try {
+      return localStorage.getItem(NOTES_STORAGE_KEY) || '';
+    } catch (error) {
+      console.error('Failed to read pitch notes from local storage:', error);
+      return '';
+    }
+  });
+  const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    localStorage.setItem(NOTES_STORAGE_KEY, notes);
-  }, [notes]);
+  const updateNotes = (nextNotes: string) => {
+    setNotes(nextNotes);
+    try {
+      localStorage.setItem(NOTES_STORAGE_KEY, nextNotes);
+    } catch (error) {
+      console.error('Failed to save pitch notes to local storage:', error);
+      setError(t('notes.saveError'));
+    }
+  };
 
   const handleSave = () => {
+    setError(null);
     const blob = new Blob([notes], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -28,12 +44,28 @@ export function NotesField() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    setError(null);
+
+    if (file.size > MAX_NOTES_FILE_SIZE_BYTES) {
+      setError(t('notes.fileTooLarge'));
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = (event) => {
       const content = event.target?.result;
       if (typeof content === 'string') {
-        setNotes(content);
+        if (notes.trim().length > 0 && content !== notes && !window.confirm(t('notes.replaceConfirm'))) {
+          return;
+        }
+        updateNotes(content);
       }
+    };
+    reader.onerror = () => {
+      setError(t('notes.openError'));
     };
     reader.readAsText(file);
     // Reset input so the same file can be opened again if needed
@@ -54,14 +86,14 @@ export function NotesField() {
           {t('notes.title')}
         </label>
         
-        <div style={{ display: 'flex', gap: 'var(--spacing-2)' }}>
+        <div className="hide-in-presentation" style={{ display: 'flex', gap: 'var(--spacing-2)' }}>
           <button 
             onClick={() => fileInputRef.current?.click()} 
             className="btn-outline" 
             style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-xs)', display: 'flex', alignItems: 'center', gap: '4px' }}
             title={t('notes.open')}
           >
-            📂 <span className="hide-in-presentation">{t('notes.open')}</span>
+            <span>{t('notes.open')}</span>
           </button>
           <button 
             onClick={handleSave} 
@@ -69,7 +101,7 @@ export function NotesField() {
             style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-xs)', display: 'flex', alignItems: 'center', gap: '4px' }}
             title={t('notes.save')}
           >
-            💾 <span className="hide-in-presentation">{t('notes.save')}</span>
+            <span>{t('notes.save')}</span>
           </button>
           <input 
             type="file" 
@@ -83,7 +115,7 @@ export function NotesField() {
       <textarea
         id="pitch-notes"
         value={notes}
-        onChange={(e) => setNotes(e.target.value)}
+        onChange={(e) => updateNotes(e.target.value)}
         placeholder={t('notes.placeholder')}
         style={{
           width: '100%',
@@ -95,8 +127,13 @@ export function NotesField() {
           color: 'var(--color-text-primary)',
           fontFamily: 'inherit',
           resize: 'vertical'
-        }}
-      />
+          }}
+        />
+        {error && (
+          <p role="alert" style={{ color: 'var(--color-error)', fontSize: 'var(--font-size-sm)', marginTop: 'var(--spacing-2)' }}>
+            {error}
+          </p>
+        )}
     </div>
   );
 }

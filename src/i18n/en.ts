@@ -7,6 +7,7 @@ export const en = {
   'app.imprint': 'Imprint',
   'app.source': 'Source Code',
   'app.coffee': 'Buy me a coffee',
+  'content.back': 'Back to app',
 
   // Home / General
   'home.title': 'Practice Elevator Pitch',
@@ -28,6 +29,7 @@ export const en = {
   'timer.pause': 'Pause',
   'timer.reset': 'Reset',
   'timer.prepare': 'Get ready: {0}',
+  'timer.progress': 'Timer progress',
   
   // Time Selector
   'timeSelector.seconds': 'seconds',
@@ -37,6 +39,10 @@ export const en = {
   'notes.placeholder': 'Write your bullet points here...',
   'notes.save': 'Save',
   'notes.open': 'Open',
+  'notes.replaceConfirm': 'Replace your current notes with the opened file?',
+  'notes.fileTooLarge': 'The file is too large. The maximum size is 100 KB.',
+  'notes.openError': 'The file could not be opened. Your current notes were kept.',
+  'notes.saveError': 'The notes could not be saved locally.',
 
   // History
   'history.show': 'Show History',
@@ -47,4 +53,5 @@ export const en = {
   'history.target': 'Target:',
   'history.actual': 'Time:',
   'history.clear': 'Clear History',
+  'history.clearConfirm': 'Clear the full history? This cannot be undone.',
 };

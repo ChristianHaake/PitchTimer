@@ -2,10 +2,10 @@
 
 This software is an open-source project designed for educational use.
 
-Protecting your data is our highest priority. That is why PitchTimer is designed so that **no** personal data is collected, processed, or transferred to servers.
+Protecting your data is a high priority. PitchTimer processes your input locally in the browser and does not transmit it to the operator or third-party servers.
 
 ## 1. Local Storage
-All inputs, notes, and history entries you make in PitchTimer remain exclusively local on your device. There is no database, no server, and no data exchange with third parties.
+All inputs, notes, and history entries you make in PitchTimer remain local on your device. There is no database for user content and no upload of your content to the operator.
 
 Data is stored using your browser's `LocalStorage` technology. If you clear your browser data, all PitchTimer data is completely removed.
 

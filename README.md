@@ -1,73 +1,95 @@
-# React + TypeScript + Vite
+# PitchTimer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PitchTimer is a browser-based training tool for elevator pitches and short
+presentations. It is designed for students and teachers who need a simple,
+local, distraction-reduced timer with notes and pitch history.
 
-Currently, two official plugins are available:
+Live application: [https://pitchtimer.haak3.de](https://pitchtimer.haak3.de)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- preset pitch durations: 30, 60, 90, and 120 seconds
+- 3-second preparation countdown
+- start, pause, reset, progress bar, and end signal
+- fullscreen presentation mode
+- local notes with `.txt` export and import
+- local history of the latest pitch runs
+- German and English interface
+- installable Progressive Web App with offline app-shell caching
+- help, about, privacy, imprint, and source links
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Privacy and local processing
 
-## Expanding the ESLint configuration
+PitchTimer runs in the browser. It has no login, no backend, no content
+database, and no upload of user-created content to the operator.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The app stores these values locally in `localStorage`:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- `pitchtimer_language`: selected interface language
+- `pitchtimer_time_mode`: selected timer preset
+- `pitchtimer_notes`: current notes text
+- `pitchtimer_history`: versioned pitch history records
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Notes can be exported as a plain text file and imported again. Imported note
+files are limited to 100 KB and replace existing notes only after confirmation.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The production site is served as a static web app with security headers in
+`public/_headers`.
+
+## Development
+
+Requirements:
+
+- Node.js `>=20.0.0`
+- npm
+
+Setup:
+
+```bash
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Vite prints the local development URL after startup.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Commands
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Type-check and build the production bundle |
+| `npm run preview` | Serve the production bundle locally |
+| `npm run test` | Run unit tests with Vitest |
+| `npm run lint` | Run ESLint |
+| `npm run typecheck` | Run TypeScript without emitting files |
+| `npm run verify` | Run typecheck, lint, tests, and build |
+
+## Architecture
+
+The app uses React 19, TypeScript, Vite, React Router, React Markdown, Vitest,
+and `vite-plugin-pwa`.
+
+Source is organized by responsibility:
+
+```text
+src/
+  components/   timer, notes, progress, and history UI components
+  hooks/        timer and history state hooks
+  i18n/         typed German and English dictionaries
+  utils/        audio and local history persistence helpers
+content/        Markdown content pages
+public/         favicon, PWA icons, and deployment headers
+docs/           architecture, conformance, and review notes
 ```
+
+More details are documented in
+[docs/architecture.md](docs/architecture.md).
+
+## Deployment
+
+The production build output is `dist/`. The app expects a static host with SPA
+fallback to `index.html`; the live deployment uses Cloudflare Pages.
+
+## License
+
+PitchTimer is licensed under GPL-3.0-only.

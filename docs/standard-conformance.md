@@ -23,5 +23,11 @@ Review date:
 
 ## App-specific decisions
 
-- Add product or architecture decisions that intentionally vary within the
-  freedom allowed by the standard.
+- `localStorage` is used for all persisted state because PitchTimer stores only
+  small text and preference data. IndexedDB is not needed unless future versions
+  add media or larger project files.
+- Pitch notes use plain `.txt` import/export. There is no full project archive
+  because the current editable data model is intentionally just notes, timer
+  preset, language, and compact history.
+- The app is a PWA for installability and offline app-shell access. It does not
+  add runtime network features.

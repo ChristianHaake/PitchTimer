@@ -1,8 +1,9 @@
 interface ProgressBarProps {
   progress: number;
+  label?: string;
 }
 
-export function ProgressBar({ progress }: ProgressBarProps) {
+export function ProgressBar({ progress, label = 'Timer progress' }: ProgressBarProps) {
   return (
     <div 
       className="progress-container"
@@ -15,6 +16,7 @@ export function ProgressBar({ progress }: ProgressBarProps) {
         margin: 'var(--spacing-4) 0'
       }}
       role="progressbar"
+      aria-label={label}
       aria-valuenow={Math.round(progress)}
       aria-valuemin={0}
       aria-valuemax={100}

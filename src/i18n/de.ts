@@ -7,6 +7,7 @@ export const de = {
   'app.imprint': 'Impressum',
   'app.source': 'Quellcode',
   'app.coffee': 'Kaffee spendieren',
+  'content.back': 'Zurück zur App',
 
   // Home / General
   'home.title': 'Elevator Pitch üben',
@@ -28,6 +29,7 @@ export const de = {
   'timer.pause': 'Pause',
   'timer.reset': 'Reset',
   'timer.prepare': 'Bereitmachen: {0}',
+  'timer.progress': 'Timer-Fortschritt',
   
   // Time Selector
   'timeSelector.seconds': 'Sekunden',
@@ -37,6 +39,10 @@ export const de = {
   'notes.placeholder': 'Schreibe hier deine Stichpunkte auf...',
   'notes.save': 'Speichern',
   'notes.open': 'Öffnen',
+  'notes.replaceConfirm': 'Aktuelle Notizen durch die geöffnete Datei ersetzen?',
+  'notes.fileTooLarge': 'Die Datei ist zu groß. Maximal erlaubt sind 100 KB.',
+  'notes.openError': 'Die Datei konnte nicht geöffnet werden. Deine aktuellen Notizen bleiben erhalten.',
+  'notes.saveError': 'Die Notizen konnten nicht lokal gespeichert werden.',
 
   // History
   'history.show': 'Verlauf einblenden',
@@ -47,4 +53,5 @@ export const de = {
   'history.target': 'Ziel:',
   'history.actual': 'Zeit:',
   'history.clear': 'Verlauf löschen',
+  'history.clearConfirm': 'Den gesamten Verlauf löschen? Diese Aktion kann nicht rückgängig gemacht werden.',
 };

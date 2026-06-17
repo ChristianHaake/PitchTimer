@@ -4,7 +4,7 @@
 
 PitchTimer helps you perfectly time your presentations, especially elevator pitches.
 
-1. **Select Time:** Choose from the presets (e.g., 60 seconds) or set a custom time.
+1. **Select Time:** Choose from the presets (for example 30, 60, 90, or 120 seconds).
 2. **Take Notes:** Write your main bullet points in the notes field. These are automatically saved in your browser.
 3. **Start:** Click "Start". There will be a short countdown (3 seconds) before the actual time starts running.
 4. **Presentation Mode:** Use the "Fullscreen" button to minimize distractions. In presentation mode, you focus entirely on the timer and your notes.

@@ -15,6 +15,12 @@ export function HistoryStats({ history, onClear }: HistoryStatsProps) {
     return null;
   }
 
+  const handleClear = () => {
+    if (window.confirm(t('history.clearConfirm'))) {
+      onClear();
+    }
+  };
+
   return (
     <div className="history-stats hide-in-presentation" style={{ marginTop: 'var(--spacing-8)', borderTop: '1px solid var(--color-border)', paddingTop: 'var(--spacing-6)' }}>
       <button 
@@ -63,7 +69,7 @@ export function HistoryStats({ history, onClear }: HistoryStatsProps) {
           {history.length > 0 && (
             <div style={{ marginTop: 'var(--spacing-4)', textAlign: 'center' }}>
               <button 
-                onClick={onClear} 
+                onClick={handleClear} 
                 className="btn-outline" 
                 style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-error)', borderColor: 'var(--color-error)' }}
               >

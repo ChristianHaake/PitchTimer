@@ -14,7 +14,7 @@ Record release-specific results below.
 ## Results
 
 - [ ] Shared checklist completed.
-- [ ] Automated verification passed.
+- [x] Automated verification passed.
 - [ ] Mobile and tablet workflow tested.
 - [ ] Import, export, reset, and recovery tested.
 - [ ] Legal and privacy content reviewed.
@@ -22,4 +22,9 @@ Record release-specific results below.
 
 ## Notes
 
-Add failures, accepted limitations, and follow-up work here.
+- Automated verification covers typecheck, lint, Vitest unit tests, and build.
+- Manual browser spot-check covered desktop and 320px mobile layout during the
+  2026-06-17 implementation pass.
+- Legal text still needs operator review before release.
+- Full tablet workflow, installability, offline behavior, and screen-reader
+  checks still need manual release testing.
