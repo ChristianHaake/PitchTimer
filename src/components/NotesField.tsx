@@ -62,11 +62,37 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
   );
 };
 
+const NOTES_TITLE_KEY = 'pitchtimer_notes_title';
+
 export function NotesField() {
   const { t } = useTranslation();
   
   const [error, setError] = useState<string | null>(null);
+  const [readingTime, setReadingTime] = useState<string>(() => {
+    try {
+      const savedContent = localStorage.getItem(NOTES_STORAGE_KEY) || '';
+      const plainText = savedContent.replace(/<[^>]+>/g, ' ');
+      const words = plainText.trim().split(/\s+/).filter(w => w.length > 0).length;
+      const totalSeconds = Math.round((words / 130) * 60);
+      const mins = Math.floor(totalSeconds / 60);
+      const secs = totalSeconds % 60;
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    } catch {
+      return '0:00';
+    }
+  });
+  const [pitchTitle, setPitchTitle] = useState<string>(() => {
+    return localStorage.getItem(NOTES_TITLE_KEY) || '';
+  });
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const calculateReadingTime = (text: string) => {
+    const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+    const totalSeconds = Math.round((words / 130) * 60);
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    setReadingTime(`${mins}:${secs.toString().padStart(2, '0')}`);
+  };
 
   const editor = useEditor({
     extensions: [
@@ -76,6 +102,7 @@ export function NotesField() {
     onUpdate: ({ editor }) => {
       try {
         localStorage.setItem(NOTES_STORAGE_KEY, editor.getHTML());
+        calculateReadingTime(editor.getText());
       } catch (error) {
         console.error('Failed to save pitch notes to local storage:', error);
         setError(t('notes.saveError'));
@@ -97,6 +124,12 @@ export function NotesField() {
     }
   }, [editor]);
 
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTitle = e.target.value;
+    setPitchTitle(newTitle);
+    localStorage.setItem(NOTES_TITLE_KEY, newTitle);
+  };
+
   const handleSave = () => {
     setError(null);
     if (!editor) return;
@@ -105,7 +138,12 @@ export function NotesField() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'pitch-notes.html';
+    
+    // Generate filename based on title or default
+    const safeTitle = pitchTitle.trim().replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    const filename = safeTitle ? `${safeTitle}.html` : 'pitch-notes.html';
+    
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -135,8 +173,14 @@ export function NotesField() {
           return;
         }
         editor.commands.setContent(content);
+        calculateReadingTime(editor.getText());
         try {
           localStorage.setItem(NOTES_STORAGE_KEY, content);
+          
+          // Also set title based on filename if possible
+          const fileNameNoExt = file.name.replace(/\.[^/.]+$/, "");
+          setPitchTitle(fileNameNoExt);
+          localStorage.setItem(NOTES_TITLE_KEY, fileNameNoExt);
         } catch (error) {
           console.error('Failed to save pitch notes to local storage:', error);
         }
@@ -153,17 +197,37 @@ export function NotesField() {
 
   return (
     <div className="notes-field" style={{ marginTop: 'var(--spacing-6)' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--spacing-2)' }}>
-        <label 
-          htmlFor="pitch-notes" 
-          style={{ 
-            fontWeight: 'var(--font-weight-medium)' 
+      <div style={{ marginBottom: 'var(--spacing-2)' }}>
+        <input 
+          type="text"
+          value={pitchTitle}
+          onChange={handleTitleChange}
+          placeholder={t('notes.title')}
+          className="pitch-title-input"
+          style={{
+            width: '100%',
+            fontSize: 'var(--font-size-lg)',
+            fontWeight: 'var(--font-weight-bold)',
+            border: 'none',
+            borderBottom: '2px solid transparent',
+            padding: 'var(--spacing-2) 0',
+            backgroundColor: 'transparent',
+            outline: 'none',
+            color: 'var(--color-text)'
           }}
-        >
-          {t('notes.title')}
-        </label>
-        
-        <div className="hide-in-presentation" style={{ display: 'flex', gap: 'var(--spacing-2)' }}>
+        />
+      </div>
+      
+      <div className="tiptap-container">
+        <MenuBar editor={editor} />
+        <EditorContent editor={editor} />
+      </div>
+
+      <div className="hide-in-presentation" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'var(--spacing-2)' }}>
+        <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)', fontWeight: 'var(--font-weight-medium)' }}>
+          {t('notes.readingTime') || 'Lesezeit:'} ~{readingTime} min
+        </div>
+        <div style={{ display: 'flex', gap: 'var(--spacing-2)' }}>
           <button 
             onClick={() => fileInputRef.current?.click()} 
             className="btn-outline" 
@@ -190,11 +254,6 @@ export function NotesField() {
             onChange={handleOpen} 
           />
         </div>
-      </div>
-      
-      <div className="tiptap-container">
-        <MenuBar editor={editor} />
-        <EditorContent editor={editor} />
       </div>
 
       {error && (

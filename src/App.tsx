@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { MarkdownPage } from './MarkdownPage';
-import { Coffee } from 'lucide-react';
+import logoImg from './assets/logo.png';
 import './index.css';
 
 import { useTimer } from './hooks/useTimer';
@@ -120,20 +120,15 @@ function App() {
   return (
     <Router>
       <header className="app-header hide-in-presentation">
-        <div className="header-logo-container">
-          <div className="header-logo-icon">
-            <svg aria-hidden="true" xmlns="http://www.w3.org/0000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
+        <Link to="/" className="brand" aria-label={`${t('home.title')} – Startseite`}>
+          <div className="brand-icon" aria-hidden="true" style={{ display: 'flex', alignItems: 'center' }}>
+            <img src={logoImg} alt="" width="32" height="32" style={{ borderRadius: '4px' }} />
           </div>
-          <div className="header-title-group">
-            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <h1>PitchTimer</h1>
-            </Link>
-            <div className="header-subtitle">{t('header.subtitle')}</div>
+          <div className="brand-text">
+            <strong>PitchTimer</strong>
+            <small>{t('header.subtitle')}</small>
           </div>
-        </div>
+        </Link>
         
         <div className="header-actions">
           <div className="badge-success">
@@ -177,18 +172,25 @@ function App() {
       </main>
 
       <footer className="app-footer hide-in-presentation">
-        <Link to="/hilfe">{t('app.help')}</Link>
-        <Link to="/ueber">{t('app.about')}</Link>
-        <Link to="/datenschutz">{t('app.privacy')}</Link>
-        <Link to="/impressum">{t('app.imprint')}</Link>
-        <a href="https://github.com/ChristianHaake/PitchTimer" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-          {t('app.source')}
-        </a>
-        <a href="https://buymeacoffee.com/christianhaake" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'white', textDecoration: 'none', padding: '4px 12px', borderRadius: 'var(--radius-sm)' }}>
-          <Coffee size={16} />
-          {t('app.coffee')}
-        </a>
+        <div className="app-footer-links" style={{ display: 'flex', gap: 'var(--spacing-4)', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <Link to="/hilfe" className="header-link">{t('app.help')}</Link>
+          <Link to="/ueber" className="header-link">{t('app.about')}</Link>
+          <Link to="/datenschutz" className="header-link">{t('app.privacy')}</Link>
+          <Link to="/impressum" className="header-link">{t('app.imprint')}</Link>
+          
+          <a href="https://www.buymeacoffee.com/Haake" target="_blank" rel="noopener noreferrer" className="bmc-link" aria-label="Buy me a coffee">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"></path>
+            </svg>
+            <span className="bmc-link-label">{t('app.coffee')}</span>
+          </a>
+          <a href="https://github.com/ChristianHaake/PitchTimer" target="_blank" rel="noopener noreferrer" className="github-link" aria-label="GitHub Repository">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.2.8-.6v-2.1c-3.3.7-4-1.4-4-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0C17.9 4.8 19 5.1 19 5.1c.6 1.6.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.8 1.1.8 2.2v3.7c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"></path>
+            </svg>
+            <span className="github-link-label">{t('app.source')}</span>
+          </a>
+        </div>
       </footer>
     </Router>
   );

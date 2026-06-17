@@ -43,6 +43,7 @@ export const en = {
   'notes.fileTooLarge': 'The file is too large. The maximum size is 100 KB.',
   'notes.openError': 'The file could not be opened. Your current notes were kept.',
   'notes.saveError': 'The notes could not be saved locally.',
+  'notes.readingTime': 'Reading time:',
 
   // History
   'history.show': 'Show History',

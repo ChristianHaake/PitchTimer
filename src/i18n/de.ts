@@ -43,6 +43,7 @@ export const de = {
   'notes.fileTooLarge': 'Die Datei ist zu groß. Maximal erlaubt sind 100 KB.',
   'notes.openError': 'Die Datei konnte nicht geöffnet werden. Deine aktuellen Notizen bleiben erhalten.',
   'notes.saveError': 'Die Notizen konnten nicht lokal gespeichert werden.',
+  'notes.readingTime': 'Lesezeit:',
 
   // History
   'history.show': 'Verlauf einblenden',

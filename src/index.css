@@ -81,22 +81,87 @@ body {
   }
 }
 
+/* Footer */
 .app-footer {
-  background-color: var(--color-bg-surface);
+  margin-top: auto;
+  padding: var(--spacing-4) var(--spacing-6);
+  background-color: var(--color-surface);
   border-top: 1px solid var(--color-border);
-  padding: var(--spacing-6) var(--spacing-4);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: var(--spacing-4);
+  font-size: 0.875rem;
+  color: var(--color-text-light);
 }
 
-.app-footer a {
-  color: var(--color-primary);
+.app-footer-links {
+  display: flex;
+  gap: var(--spacing-4);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--color-text-light);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.github-link svg {
+  display: block;
+  flex: 0 0 auto;
+}
+.github-link:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.bmc-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 4px 12px;
+  border: 1px solid #000;
+  border-radius: 999px;
+  background: #FFDD00;
+  color: #000;
+  font-weight: 700;
+  text-decoration: none;
+  transition: filter 0.2s;
+}
+.bmc-link svg {
+  display: block;
+  flex: 0 0 auto;
+}
+.bmc-link:hover {
+  filter: brightness(0.95);
+}
+
+@media (max-width: 600px) {
+  .bmc-link-label, .github-link-label {
+    display: none;
+  }
+}
+
+.app-footer .header-link {
+  color: var(--color-text-secondary);
   text-decoration: none;
   padding: var(--spacing-2); /* larger touch target */
+  transition: color 0.2s;
+}
+
+.app-footer .header-link:hover {
+  text-decoration: underline;
+  color: var(--color-text);
 }
 
 @media (max-width: 600px) {
