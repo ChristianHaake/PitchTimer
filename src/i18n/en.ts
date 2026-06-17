@@ -16,7 +16,7 @@ export const en = {
 
   // Header & Hero
   'header.subtitle': 'Elevator Pitch Training',
-  'header.localData': '✓ Content stays local',
+  'header.localData': 'Content stays local',
   'header.teachers': 'For Teachers',
   'banner.education': 'This simulation is strictly for educational purposes.',
   'banner.responsibility': 'Responsible Use',

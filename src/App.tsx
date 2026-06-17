@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { MarkdownPage } from './MarkdownPage';
-import logoImg from './assets/logo.png';
+import logoWideImg from './assets/logo-wide.png';
 import './index.css';
 
 import { useTimer } from './hooks/useTimer';
@@ -120,13 +120,10 @@ function App() {
   return (
     <Router>
       <header className="app-header hide-in-presentation">
-        <Link to="/" className="brand" aria-label={`${t('home.title')} – Startseite`}>
-          <div className="brand-icon" aria-hidden="true" style={{ display: 'flex', alignItems: 'center' }}>
-            <img src={logoImg} alt="" width="32" height="32" style={{ borderRadius: '4px' }} />
-          </div>
+        <Link to="/" className="brand" aria-label={`${t('home.title')} – Startseite`} style={{ gap: 'var(--spacing-3)' }}>
+          <img src={logoWideImg} alt="PitchTimer Logo" style={{ height: '36px', width: 'auto' }} />
           <div className="brand-text">
-            <strong>PitchTimer</strong>
-            <small>{t('header.subtitle')}</small>
+            <small style={{ marginTop: '2px' }}>{t('header.subtitle')}</small>
           </div>
         </Link>
         
