@@ -90,6 +90,10 @@ More details are documented in
 The production build output is `dist/`. The app expects a static host with SPA
 fallback to `index.html`; the live deployment uses Cloudflare Pages.
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a history of changes.
+
 ## License
 
 PitchTimer is licensed under GPL-3.0-only.
