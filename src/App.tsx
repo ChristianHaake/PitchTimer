@@ -9,11 +9,13 @@ import { TimerDisplay } from './components/TimerDisplay';
 import { TimerControls } from './components/TimerControls';
 import { ProgressBar } from './components/ProgressBar';
 import { TimeSelector } from './components/TimeSelector';
-import { NotesField } from './components/NotesField';
 import { HistoryStats } from './components/HistoryStats';
+import { useWakeLock } from './hooks/useWakeLock';
 
-import { useState, useEffect, useCallback } from 'react';
+import { Suspense, lazy, useState, useEffect, useCallback } from 'react';
 import { useTranslation } from './i18n';
+
+const NotesField = lazy(() => import('./components/NotesField').then((module) => ({ default: module.NotesField })));
 
 function Home() {
   const { t } = useTranslation();
@@ -32,6 +34,7 @@ function Home() {
     onComplete: handleComplete,
     onCancel: handleCancel,
   });
+  useWakeLock(isRunning || isPreparing || isFullscreen);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -105,7 +108,9 @@ function Home() {
         />
       </div>
       
-      <NotesField />
+      <Suspense fallback={<div className="notes-loading">{t('notes.loading')}</div>}>
+        <NotesField presentationMode={isFullscreen} />
+      </Suspense>
       
       <HistoryStats history={history} onClear={clearHistory} />
       

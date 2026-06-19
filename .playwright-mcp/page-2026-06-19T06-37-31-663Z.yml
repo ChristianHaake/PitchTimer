@@ -1,0 +1,84 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "Practice Elevator Pitch – Startseite" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - img "PitchTimer Logo" [ref=e5]
+      - generic [ref=e6]: Elevator Pitch Training
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - img [ref=e9]
+        - text: Content stays local
+      - generic [ref=e11]:
+        - button "DE" [ref=e12] [cursor=pointer]
+        - button "EN" [pressed] [ref=e13] [cursor=pointer]
+      - link "For Teachers" [ref=e14] [cursor=pointer]:
+        - /url: /lehrkraefte
+        - img [ref=e15]
+        - text: For Teachers
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - img [ref=e21]
+        - strong [ref=e24]: This simulation is strictly for educational purposes.
+      - link "Responsible Use" [ref=e25] [cursor=pointer]:
+        - /url: /ueber
+    - generic [ref=e26]:
+      - generic [ref=e27]: LOCAL. FOCUSED. DISTRACTION-FREE.
+      - heading "Perfect your elevator pitch." [level=1] [ref=e28]
+      - paragraph [ref=e29]: Train your presentation skills with exact timing. In presentation mode, you focus entirely on your notes. No sign-up and no upload required.
+    - generic [ref=e30]:
+      - button "Fullscreen" [ref=e32] [cursor=pointer]
+      - generic [ref=e33]:
+        - button "30 seconds" [ref=e34] [cursor=pointer]
+        - button "60 seconds" [ref=e35] [cursor=pointer]
+        - button "90 seconds" [ref=e36] [cursor=pointer]
+        - button "120 seconds" [ref=e37] [cursor=pointer]
+      - generic [ref=e38]:
+        - generic [ref=e39]: 01:00
+        - progressbar "Timer progress" [ref=e40]
+        - button "Start" [ref=e42] [cursor=pointer]
+      - generic [ref=e43]:
+        - textbox "My Pitch Notes" [ref=e45]
+        - generic [ref=e46]:
+          - generic [ref=e47]:
+            - button "Bold" [ref=e48] [cursor=pointer]:
+              - img [ref=e49]
+            - button "Italic" [ref=e51] [cursor=pointer]:
+              - img [ref=e52]
+            - button "Heading 1" [ref=e55] [cursor=pointer]:
+              - img [ref=e56]
+            - button "Heading 2" [ref=e58] [cursor=pointer]:
+              - img [ref=e59]
+            - button "Bullet List" [ref=e62] [cursor=pointer]:
+              - img [ref=e63]
+            - button "Numbered List" [ref=e64] [cursor=pointer]:
+              - img [ref=e65]
+          - textbox [ref=e69]:
+            - paragraph [ref=e70]
+        - generic [ref=e71]:
+          - generic [ref=e72]: "Reading time: ~0:00 min"
+          - generic [ref=e73]:
+            - button "Open" [ref=e74] [cursor=pointer]:
+              - img [ref=e75]
+              - generic [ref=e78]: Open
+            - button "Save" [ref=e79] [cursor=pointer]:
+              - img [ref=e80]
+              - generic [ref=e83]: Save
+  - contentinfo [ref=e84]:
+    - generic [ref=e85]:
+      - link "Help" [ref=e86] [cursor=pointer]:
+        - /url: /hilfe
+      - link "About" [ref=e87] [cursor=pointer]:
+        - /url: /ueber
+      - link "Privacy" [ref=e88] [cursor=pointer]:
+        - /url: /datenschutz
+      - link "Imprint" [ref=e89] [cursor=pointer]:
+        - /url: /impressum
+      - link "Buy me a coffee" [ref=e90] [cursor=pointer]:
+        - /url: https://www.buymeacoffee.com/Haake
+        - img [ref=e91]
+        - generic [ref=e93]: Buy me a coffee
+      - link "GitHub Repository" [ref=e94] [cursor=pointer]:
+        - /url: https://github.com/ChristianHaake/PitchTimer
+        - img [ref=e95]
+        - generic [ref=e97]: Source Code

@@ -11,8 +11,8 @@ Live application: [https://pitchtimer.haak3.de](https://pitchtimer.haak3.de)
 - preset pitch durations: 30, 60, 90, and 120 seconds
 - 3-second preparation countdown
 - start, pause, reset, progress bar, and end signal
-- fullscreen presentation mode
-- local notes with `.txt` export and import
+- fullscreen presentation mode with read-only prompter view
+- local rich-text notes with `.html` export and `.txt`, `.md`, or `.html` import
 - local history of the latest pitch runs
 - German and English interface
 - installable Progressive Web App with offline app-shell caching
@@ -27,11 +27,13 @@ The app stores these values locally in `localStorage`:
 
 - `pitchtimer_language`: selected interface language
 - `pitchtimer_time_mode`: selected timer preset
-- `pitchtimer_notes`: current notes text
+- `pitchtimer_notes`: current notes HTML
+- `pitchtimer_notes_title`: current pitch title
+- `pitchtimer_prompter_font_scale`: selected prompter text size
 - `pitchtimer_history`: versioned pitch history records
 
-Notes can be exported as a plain text file and imported again. Imported note
-files are limited to 100 KB and replace existing notes only after confirmation.
+Notes can be exported as an HTML file and imported again. Imported note files
+are limited to 100 KB and replace existing notes only after confirmation.
 
 The production site is served as a static web app with security headers in
 `public/_headers`.
@@ -66,8 +68,8 @@ Vite prints the local development URL after startup.
 
 ## Architecture
 
-The app uses React 19, TypeScript, Vite, React Router, React Markdown, Vitest,
-and `vite-plugin-pwa`.
+The app uses React 19, TypeScript, Vite, React Router, React Markdown, Tiptap,
+Vitest, and `vite-plugin-pwa`.
 
 Source is organized by responsibility:
 

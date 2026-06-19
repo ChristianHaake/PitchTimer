@@ -1,0 +1,84 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "Practice Elevator Pitch – Startseite" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - img "PitchTimer Logo" [ref=e5]
+      - generic [ref=e6]: Elevator Pitch Training
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - img [ref=e9]
+        - text: Content stays local
+      - generic [ref=e11]:
+        - button "DE" [ref=e12] [cursor=pointer]
+        - button "EN" [pressed] [ref=e13] [cursor=pointer]
+      - link "For Teachers" [ref=e14] [cursor=pointer]:
+        - /url: /lehrkraefte
+        - img [ref=e15]
+        - text: For Teachers
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - img [ref=e21]
+        - strong [ref=e24]: This simulation is strictly for educational purposes.
+      - link "Responsible Use" [ref=e25] [cursor=pointer]:
+        - /url: /ueber
+    - generic [ref=e26]:
+      - button "Fullscreen" [ref=e28] [cursor=pointer]
+      - generic [ref=e29]:
+        - button "30 seconds" [ref=e30] [cursor=pointer]
+        - button "60 seconds" [ref=e31] [cursor=pointer]
+        - button "90 seconds" [ref=e32] [cursor=pointer]
+        - button "120 seconds" [ref=e33] [cursor=pointer]
+      - generic [ref=e34]:
+        - generic [ref=e35]: 01:00
+        - progressbar "Timer progress" [ref=e36]
+        - button "Start" [ref=e38] [cursor=pointer]
+      - generic [ref=e39]:
+        - textbox "My Pitch Notes" [ref=e41]: Demo Pitch
+        - generic [ref=e42]:
+          - generic [ref=e43]:
+            - button "Bold" [ref=e44] [cursor=pointer]:
+              - img [ref=e45]
+            - button "Italic" [ref=e47] [cursor=pointer]:
+              - img [ref=e48]
+            - button "Heading 1" [ref=e51] [cursor=pointer]:
+              - img [ref=e52]
+            - button "Heading 2" [ref=e54] [cursor=pointer]:
+              - img [ref=e55]
+            - button "Bullet List" [ref=e58] [cursor=pointer]:
+              - img [ref=e59]
+            - button "Numbered List" [ref=e60] [cursor=pointer]:
+              - img [ref=e61]
+          - textbox [ref=e65]:
+            - paragraph [ref=e66]: Begrüßung
+            - paragraph [ref=e67]: Problem
+            - paragraph [ref=e68]: Lösung
+            - paragraph [ref=e69]: Call to action
+        - generic [ref=e70]:
+          - generic [ref=e71]: "Reading time: ~0:03 min"
+          - generic [ref=e72]:
+            - button "Open" [ref=e73] [cursor=pointer]:
+              - img [ref=e74]
+              - generic [ref=e77]: Open
+            - button "Save" [ref=e78] [cursor=pointer]:
+              - img [ref=e79]
+              - generic [ref=e82]: Save
+      - button "Show History (1) ▼" [ref=e84] [cursor=pointer]:
+        - generic [ref=e85]: Show History (1)
+        - generic [ref=e86]: ▼
+  - contentinfo [ref=e87]:
+    - generic [ref=e88]:
+      - link "Help" [ref=e89] [cursor=pointer]:
+        - /url: /hilfe
+      - link "About" [ref=e90] [cursor=pointer]:
+        - /url: /ueber
+      - link "Privacy" [ref=e91] [cursor=pointer]:
+        - /url: /datenschutz
+      - link "Imprint" [ref=e92] [cursor=pointer]:
+        - /url: /impressum
+      - link "Buy me a coffee" [ref=e93] [cursor=pointer]:
+        - /url: https://www.buymeacoffee.com/Haake
+        - img [ref=e94]
+      - link "GitHub Repository" [ref=e96] [cursor=pointer]:
+        - /url: https://github.com/ChristianHaake/PitchTimer
+        - img [ref=e97]

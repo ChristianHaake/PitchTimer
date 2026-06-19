@@ -85,14 +85,14 @@ body {
 .app-footer {
   margin-top: auto;
   padding: var(--spacing-4) var(--spacing-6);
-  background-color: var(--color-surface);
+  background-color: var(--color-bg-surface);
   border-top: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-4);
   font-size: 0.875rem;
-  color: var(--color-text-light);
+  color: var(--color-text-secondary);
 }
 
 .app-footer-links {
@@ -109,7 +109,7 @@ body {
   gap: 6px;
   padding: 4px 10px;
   border-radius: 999px;
-  color: var(--color-text-light);
+  color: var(--color-text-secondary);
   font-weight: 700;
   text-decoration: none;
   transition: all 0.2s;
@@ -119,8 +119,8 @@ body {
   flex: 0 0 auto;
 }
 .github-link:hover {
-  background: var(--color-surface-hover);
-  color: var(--color-text);
+  background: var(--color-bg-workspace);
+  color: var(--color-text-primary);
 }
 
 .bmc-link {
@@ -161,7 +161,7 @@ body {
 
 .app-footer .header-link:hover {
   text-decoration: underline;
-  color: var(--color-text);
+  color: var(--color-text-primary);
 }
 
 @media (max-width: 600px) {
@@ -246,6 +246,7 @@ button:disabled {
 body.presentation-mode .app-header,
 body.presentation-mode .app-footer,
 body.presentation-mode .time-selector,
+body.presentation-mode .timer-controls,
 body.presentation-mode .history-stats,
 body.presentation-mode .hide-in-presentation {
   display: none !important;
@@ -268,17 +269,53 @@ body.presentation-mode .surface-panel {
   box-shadow: none;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  overflow: hidden;
   padding: var(--spacing-8) !important;
 }
 
 body.presentation-mode .timer-wrapper {
   border: none !important;
-  margin-bottom: var(--spacing-8);
+  margin-bottom: var(--spacing-4);
+  padding: 0 !important;
+  flex: 0 0 auto;
 }
 
 body.presentation-mode .timer-display {
-  font-size: 12vw !important; /* Huge responsive text in presentation mode */
+  font-size: clamp(3rem, 10vw, 8rem) !important;
+  margin: var(--spacing-4) 0 !important;
+}
+
+body.presentation-mode .notes-field {
+  min-height: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--spacing-4) !important;
+}
+
+body.presentation-mode .pitch-title-input {
+  font-size: clamp(1.5rem, 4vw, 3rem) !important;
+}
+
+body.presentation-mode .tiptap-container {
+  border: none;
+  background-color: transparent;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+body.presentation-mode .ProseMirror {
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--spacing-4) 0;
+  font-size: calc(1.25rem * var(--prompter-font-scale, 1.2));
+  line-height: 1.65;
+}
+
+body.presentation-mode .ProseMirror:focus {
+  outline: none;
 }
 
 /* UI Overhaul specific utilities */
@@ -523,6 +560,7 @@ body.presentation-mode .timer-display {
   min-height: 200px;
   outline: none;
   color: var(--color-text-primary);
+  font-size: calc(1rem * var(--prompter-font-scale, 1));
 }
 
 .ProseMirror p {
@@ -541,4 +579,37 @@ body.presentation-mode .timer-display {
 .ProseMirror ul, .ProseMirror ol {
   padding-left: var(--spacing-6);
   margin-bottom: var(--spacing-2);
+}
+
+.notes-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
+}
+
+.notes-reading-time {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.notes-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+}
+
+@media (max-width: 420px) {
+  .notes-meta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .notes-actions {
+    justify-content: flex-start;
+    width: 100%;
+  }
 }

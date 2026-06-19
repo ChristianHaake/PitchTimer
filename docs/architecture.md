@@ -14,11 +14,12 @@
 - Vite for development and production builds
 - React Router for public routes
 - React Markdown for bundled Markdown content pages
+- Tiptap for rich-text pitch notes
 - `vite-plugin-pwa` for installability and offline app-shell caching
 - Vitest for focused unit tests
 
-The app is intentionally small. Browser-native APIs are used for fullscreen,
-file import/export, local persistence, audio output, and PWA runtime behavior.
+Browser-native APIs are used for fullscreen, file import/export, local
+persistence, audio output, screen wake lock, and PWA runtime behavior.
 
 ## Source Structure
 
@@ -38,7 +39,7 @@ In-memory state is owned by React hooks:
 
 - `useTimer`: selected duration, remaining time, preparation countdown, running state
 - `useHistory`: pitch history records
-- `NotesField`: current notes text
+- `NotesField`: current title, rich-text notes, estimated reading time, prompter text size
 - `LanguageProvider`: selected language
 
 Timer countdowns are deadline-based. The visible remaining time is calculated
@@ -51,7 +52,9 @@ Persisted state uses namespaced `localStorage` keys:
 | --- | --- | --- | --- |
 | `pitchtimer_language` | string: `de` or `en` | selected interface language | browser site-data deletion |
 | `pitchtimer_time_mode` | supported number preset | selected timer duration | browser site-data deletion |
-| `pitchtimer_notes` | plain text | local notes | overwritten by user input/import or browser site-data deletion |
+| `pitchtimer_notes` | HTML string | local rich-text notes | overwritten by user input/import or browser site-data deletion |
+| `pitchtimer_notes_title` | plain text | pitch title | overwritten by user input/import or browser site-data deletion |
+| `pitchtimer_prompter_font_scale` | number from `1` to `1.8` | prompter text size | browser site-data deletion |
 | `pitchtimer_history` | `{ version: 1, records: PitchRecord[] }` | latest pitch runs | clear-history action or browser site-data deletion |
 
 `pitchtimer_history` can still read the legacy array format and writes the
@@ -61,10 +64,11 @@ Unsupported future versions are rejected by returning an empty history.
 ## Project Files
 
 PitchTimer does not have a full editable project format. Notes can be exported
-and imported as plain text files:
+and imported as HTML files:
 
-- extension: `.txt`
-- media type: `text/plain`
+- export extension: `.html`
+- import extensions: `.txt`, `.md`, `.html`
+- export media type: `text/html;charset=utf-8`
 - maximum import size: 100 KB
 - replacement of non-empty notes requires confirmation
 - failed imports preserve current notes
@@ -93,6 +97,14 @@ The PWA configuration generates:
 Offline behavior is intentionally limited to the app shell and bundled assets.
 User content remains local browser state.
 
+## Presentation Mode
+
+Fullscreen mode adds `presentation-mode` to the document body. In this mode,
+navigation, history, editor toolbar, import/export controls, and timer controls
+are hidden. The notes editor becomes read-only and scrollable. The app requests
+a screen wake lock while the timer, preparation countdown, or presentation mode
+is active; unsupported browsers ignore this gracefully.
+
 ## Deployment
 
 - Target: Cloudflare Pages static deployment
@@ -105,11 +117,10 @@ User content remains local browser state.
 
 ## Decisions and Exceptions
 
-- `localStorage` is sufficient because the app stores only small text
-  preferences, notes, and compact history records. IndexedDB is not currently
-  needed.
-- Notes use plain text import/export instead of a versioned project file. A
-  project archive would be unnecessary until the app stores richer structured
-  pitch plans or media.
+- `localStorage` is sufficient because the app stores small preferences, notes
+  HTML, and compact history records. IndexedDB is not currently needed.
+- Notes use HTML import/export instead of a versioned project file. A project
+  archive would be unnecessary until the app stores richer structured pitch
+  plans or media.
 
 See `standard-conformance.md` for standard review notes.

@@ -2,10 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from '../i18n';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { Bold, Italic, List, ListOrdered, Heading1, Heading2, Download, Upload } from 'lucide-react';
+import { Bold, Italic, List, ListOrdered, Heading1, Heading2, Download, Upload, Minus, Plus } from 'lucide-react';
 
 const NOTES_STORAGE_KEY = 'pitchtimer_notes';
+const NOTES_TITLE_KEY = 'pitchtimer_notes_title';
+const PROMPTER_FONT_SCALE_KEY = 'pitchtimer_prompter_font_scale';
 const MAX_NOTES_FILE_SIZE_BYTES = 100 * 1024;
+const MIN_PROMPTER_FONT_SCALE = 1;
+const MAX_PROMPTER_FONT_SCALE = 1.8;
 
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) {
@@ -62,15 +66,42 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
   );
 };
 
-const NOTES_TITLE_KEY = 'pitchtimer_notes_title';
+interface NotesFieldProps {
+  presentationMode?: boolean;
+}
 
-export function NotesField() {
+function readLocalStorage(key: string) {
+  try {
+    return localStorage.getItem(key) || '';
+  } catch (error) {
+    console.error(`Failed to read ${key} from local storage:`, error);
+    return '';
+  }
+}
+
+function writeLocalStorage(key: string, value: string) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (error) {
+    console.error(`Failed to save ${key} to local storage:`, error);
+    throw error;
+  }
+}
+
+function readPrompterFontScale() {
+  const saved = Number.parseFloat(readLocalStorage(PROMPTER_FONT_SCALE_KEY));
+  if (!Number.isFinite(saved)) return 1.2;
+  return Math.min(Math.max(saved, MIN_PROMPTER_FONT_SCALE), MAX_PROMPTER_FONT_SCALE);
+}
+
+export function NotesField({ presentationMode = false }: NotesFieldProps) {
   const { t } = useTranslation();
   
   const [error, setError] = useState<string | null>(null);
+  const [prompterFontScale, setPrompterFontScale] = useState(readPrompterFontScale);
   const [readingTime, setReadingTime] = useState<string>(() => {
     try {
-      const savedContent = localStorage.getItem(NOTES_STORAGE_KEY) || '';
+      const savedContent = readLocalStorage(NOTES_STORAGE_KEY);
       const plainText = savedContent.replace(/<[^>]+>/g, ' ');
       const words = plainText.trim().split(/\s+/).filter(w => w.length > 0).length;
       const totalSeconds = Math.round((words / 130) * 60);
@@ -82,7 +113,7 @@ export function NotesField() {
     }
   });
   const [pitchTitle, setPitchTitle] = useState<string>(() => {
-    return localStorage.getItem(NOTES_TITLE_KEY) || '';
+    return readLocalStorage(NOTES_TITLE_KEY);
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -99,9 +130,10 @@ export function NotesField() {
       StarterKit,
     ],
     content: '',
+    editable: !presentationMode,
     onUpdate: ({ editor }) => {
       try {
-        localStorage.setItem(NOTES_STORAGE_KEY, editor.getHTML());
+        writeLocalStorage(NOTES_STORAGE_KEY, editor.getHTML());
         calculateReadingTime(editor.getText());
       } catch (error) {
         console.error('Failed to save pitch notes to local storage:', error);
@@ -110,11 +142,15 @@ export function NotesField() {
     },
   });
 
+  useEffect(() => {
+    editor?.setEditable(!presentationMode);
+  }, [editor, presentationMode]);
+
   // Load initial content on mount
   useEffect(() => {
     if (editor && !editor.isDestroyed) {
       try {
-        const savedContent = localStorage.getItem(NOTES_STORAGE_KEY) || '';
+        const savedContent = readLocalStorage(NOTES_STORAGE_KEY);
         if (savedContent) {
           editor.commands.setContent(savedContent);
         }
@@ -127,14 +163,30 @@ export function NotesField() {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
     setPitchTitle(newTitle);
-    localStorage.setItem(NOTES_TITLE_KEY, newTitle);
+    try {
+      writeLocalStorage(NOTES_TITLE_KEY, newTitle);
+    } catch {
+      setError(t('notes.saveError'));
+    }
+  };
+
+  const changePrompterFontScale = (delta: number) => {
+    setPrompterFontScale((current) => {
+      const next = Math.min(Math.max(Number((current + delta).toFixed(2)), MIN_PROMPTER_FONT_SCALE), MAX_PROMPTER_FONT_SCALE);
+      try {
+        writeLocalStorage(PROMPTER_FONT_SCALE_KEY, String(next));
+      } catch {
+        setError(t('notes.saveError'));
+      }
+      return next;
+    });
   };
 
   const handleSave = () => {
     setError(null);
     if (!editor) return;
     const content = editor.getHTML();
-    const blob = new Blob([content], { type: 'text/html' });
+    const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -175,12 +227,12 @@ export function NotesField() {
         editor.commands.setContent(content);
         calculateReadingTime(editor.getText());
         try {
-          localStorage.setItem(NOTES_STORAGE_KEY, content);
+          writeLocalStorage(NOTES_STORAGE_KEY, content);
           
           // Also set title based on filename if possible
           const fileNameNoExt = file.name.replace(/\.[^/.]+$/, "");
           setPitchTitle(fileNameNoExt);
-          localStorage.setItem(NOTES_TITLE_KEY, fileNameNoExt);
+          writeLocalStorage(NOTES_TITLE_KEY, fileNameNoExt);
         } catch (error) {
           console.error('Failed to save pitch notes to local storage:', error);
         }
@@ -204,6 +256,7 @@ export function NotesField() {
           onChange={handleTitleChange}
           placeholder={t('notes.title')}
           className="pitch-title-input"
+          readOnly={presentationMode}
           style={{
             width: '100%',
             fontSize: 'var(--font-size-lg)',
@@ -213,21 +266,39 @@ export function NotesField() {
             padding: 'var(--spacing-2) 0',
             backgroundColor: 'transparent',
             outline: 'none',
-            color: 'var(--color-text)'
+            color: 'var(--color-text-primary)'
           }}
         />
       </div>
       
-      <div className="tiptap-container">
+      <div className="tiptap-container" style={{ '--prompter-font-scale': prompterFontScale } as React.CSSProperties}>
         <MenuBar editor={editor} />
         <EditorContent editor={editor} />
       </div>
 
-      <div className="hide-in-presentation" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'var(--spacing-2)' }}>
-        <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)', fontWeight: 'var(--font-weight-medium)' }}>
+      <div className="notes-meta hide-in-presentation">
+        <div className="notes-reading-time">
           {t('notes.readingTime') || 'Lesezeit:'} ~{readingTime} min
         </div>
-        <div style={{ display: 'flex', gap: 'var(--spacing-2)' }}>
+        <div className="notes-actions">
+          <button
+            onClick={() => changePrompterFontScale(-0.1)}
+            className="btn-outline"
+            style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-xs)', display: 'flex', alignItems: 'center', gap: '4px' }}
+            title={t('notes.smaller')}
+            aria-label={t('notes.smaller')}
+          >
+            <Minus size={14} />
+          </button>
+          <button
+            onClick={() => changePrompterFontScale(0.1)}
+            className="btn-outline"
+            style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-xs)', display: 'flex', alignItems: 'center', gap: '4px' }}
+            title={t('notes.larger')}
+            aria-label={t('notes.larger')}
+          >
+            <Plus size={14} />
+          </button>
           <button 
             onClick={() => fileInputRef.current?.click()} 
             className="btn-outline" 
@@ -264,4 +335,3 @@ export function NotesField() {
     </div>
   );
 }
-

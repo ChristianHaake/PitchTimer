@@ -44,6 +44,9 @@ export const de = {
   'notes.openError': 'Die Datei konnte nicht geöffnet werden. Deine aktuellen Notizen bleiben erhalten.',
   'notes.saveError': 'Die Notizen konnten nicht lokal gespeichert werden.',
   'notes.readingTime': 'Lesezeit:',
+  'notes.loading': 'Notizen werden geladen...',
+  'notes.smaller': 'Prompter-Schrift verkleinern',
+  'notes.larger': 'Prompter-Schrift vergrößern',
 
   // History
   'history.show': 'Verlauf einblenden',

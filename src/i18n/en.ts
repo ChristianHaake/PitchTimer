@@ -44,6 +44,9 @@ export const en = {
   'notes.openError': 'The file could not be opened. Your current notes were kept.',
   'notes.saveError': 'The notes could not be saved locally.',
   'notes.readingTime': 'Reading time:',
+  'notes.loading': 'Loading notes...',
+  'notes.smaller': 'Decrease prompter text size',
+  'notes.larger': 'Increase prompter text size',
 
   // History
   'history.show': 'Show History',

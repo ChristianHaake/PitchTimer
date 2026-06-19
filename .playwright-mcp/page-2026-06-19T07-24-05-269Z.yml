@@ -1,0 +1,67 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - link "Practice Elevator Pitch – Startseite" [ref=e4] [cursor=pointer]:
+      - /url: /
+      - img "PitchTimer Logo" [ref=e5]
+      - generic [ref=e6]: Elevator Pitch Training
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - img [ref=e9]
+        - text: Content stays local
+      - generic [ref=e11]:
+        - button "DE" [ref=e12] [cursor=pointer]
+        - button "EN" [pressed] [ref=e13] [cursor=pointer]
+      - link "For Teachers" [ref=e14] [cursor=pointer]:
+        - /url: /lehrkraefte
+        - img [ref=e15]
+        - text: For Teachers
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - link "Back to app" [ref=e20] [cursor=pointer]:
+        - /url: /
+      - heading "For Teachers" [level=1] [ref=e21]
+      - paragraph [ref=e22]: PitchTimer is a tool developed specifically for the educational sector to practice presentations and short pitches under realistic time conditions.
+      - heading "Classroom Scenarios" [level=2] [ref=e23]
+      - paragraph [ref=e24]:
+        - strong [ref=e25]: 1. Elevator Pitches & Startup Ideas
+        - text: Have students present their business ideas in exactly 60 or 90 seconds. The strict time limit encourages them to focus on the essentials.
+      - paragraph [ref=e26]:
+        - strong [ref=e27]: 2. Book Reports (One-Minute Talks)
+        - text: Use the timer for very short presentations of books or films. Students learn to build suspense and formulate their most important arguments precisely.
+      - paragraph [ref=e28]:
+        - strong [ref=e29]: 3. Exam Preparation
+        - text: Oral exams often have fixed time windows for free speaking. With PitchTimer, learners can independently train their sense of timing.
+      - heading "How to use PitchTimer" [level=2] [ref=e30]
+      - list [ref=e31]:
+        - listitem [ref=e32]:
+          - strong [ref=e33]: Pitch Stations
+          - text: ": Set up stations with tablets or laptops in the classroom. Students can practice independently or give each other feedback."
+        - listitem [ref=e34]:
+          - strong [ref=e35]: Presentation Mode
+          - text: ": Use the \"Fullscreen\" button to display the timer largely on the smartboard or projector. All distracting elements are hidden."
+        - listitem [ref=e36]:
+          - strong [ref=e37]: Notes Field
+          - text: ": Learners can write down their bullet points directly in PitchTimer, format them, and save them as a file to continue working on them in the next lesson."
+      - heading "Privacy in the Classroom" [level=2] [ref=e38]
+      - paragraph [ref=e39]:
+        - text: PitchTimer is
+        - strong [ref=e40]: privacy-friendly by design
+        - text: . All entered notes and history data are stored exclusively
+        - strong [ref=e41]: locally in the browser
+        - text: . There is no login, no cloud storage, and no tracking by us. You can use the tool in the classroom without hesitation.
+  - contentinfo [ref=e42]:
+    - generic [ref=e43]:
+      - link "Help" [ref=e44] [cursor=pointer]:
+        - /url: /hilfe
+      - link "About" [ref=e45] [cursor=pointer]:
+        - /url: /ueber
+      - link "Privacy" [ref=e46] [cursor=pointer]:
+        - /url: /datenschutz
+      - link "Imprint" [ref=e47] [cursor=pointer]:
+        - /url: /impressum
+      - link "Buy me a coffee" [ref=e48] [cursor=pointer]:
+        - /url: https://www.buymeacoffee.com/Haake
+        - img [ref=e49]
+      - link "GitHub Repository" [ref=e51] [cursor=pointer]:
+        - /url: https://github.com/ChristianHaake/PitchTimer
+        - img [ref=e52]
