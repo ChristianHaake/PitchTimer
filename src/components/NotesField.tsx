@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, type MutableRefObject } from 'react';
 import { useTranslation } from '../i18n';
 import { useEditor, EditorContent, Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Bold, Italic, List, ListOrdered, Heading1, Heading2, Download, Upload, Minus, Plus } from 'lucide-react';
+import { isHtmlNotesFile, plainTextToEditorHtml, stripHtmlForReadingTime } from '../utils/notes';
 
 const NOTES_STORAGE_KEY = 'pitchtimer_notes';
 const NOTES_TITLE_KEY = 'pitchtimer_notes_title';
@@ -19,46 +20,58 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
   return (
     <div className="tiptap-toolbar hide-in-presentation">
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBold().run()}
         className={editor.isActive('bold') ? 'is-active' : ''}
         title="Bold"
+        aria-label="Bold"
       >
         <Bold size={16} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleItalic().run()}
         className={editor.isActive('italic') ? 'is-active' : ''}
         title="Italic"
+        aria-label="Italic"
       >
         <Italic size={16} />
       </button>
       <div className="toolbar-divider" />
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
         className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
         title="Heading 1"
+        aria-label="Heading 1"
       >
         <Heading1 size={16} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
         title="Heading 2"
+        aria-label="Heading 2"
       >
         <Heading2 size={16} />
       </button>
       <div className="toolbar-divider" />
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         className={editor.isActive('bulletList') ? 'is-active' : ''}
         title="Bullet List"
+        aria-label="Bullet List"
       >
         <List size={16} />
       </button>
       <button
+        type="button"
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         className={editor.isActive('orderedList') ? 'is-active' : ''}
         title="Numbered List"
+        aria-label="Numbered List"
       >
         <ListOrdered size={16} />
       </button>
@@ -94,6 +107,33 @@ function readPrompterFontScale() {
   return Math.min(Math.max(saved, MIN_PROMPTER_FONT_SCALE), MAX_PROMPTER_FONT_SCALE);
 }
 
+function scheduleLocalStorageWrite(
+  key: string,
+  value: string,
+  timeoutRef: MutableRefObject<number | null>,
+  pendingValueRef: MutableRefObject<string | null>,
+  onError: (error: unknown) => void,
+) {
+  pendingValueRef.current = value;
+
+  if (timeoutRef.current !== null) {
+    window.clearTimeout(timeoutRef.current);
+  }
+
+  timeoutRef.current = window.setTimeout(() => {
+    timeoutRef.current = null;
+    const pendingValue = pendingValueRef.current;
+    pendingValueRef.current = null;
+    if (pendingValue !== null) {
+      try {
+        writeLocalStorage(key, pendingValue);
+      } catch (error) {
+        onError(error);
+      }
+    }
+  }, 250);
+}
+
 export function NotesField({ presentationMode = false }: NotesFieldProps) {
   const { t } = useTranslation();
   
@@ -102,7 +142,7 @@ export function NotesField({ presentationMode = false }: NotesFieldProps) {
   const [readingTime, setReadingTime] = useState<string>(() => {
     try {
       const savedContent = readLocalStorage(NOTES_STORAGE_KEY);
-      const plainText = savedContent.replace(/<[^>]+>/g, ' ');
+      const plainText = stripHtmlForReadingTime(savedContent);
       const words = plainText.trim().split(/\s+/).filter(w => w.length > 0).length;
       const totalSeconds = Math.round((words / 130) * 60);
       const mins = Math.floor(totalSeconds / 60);
@@ -116,6 +156,8 @@ export function NotesField({ presentationMode = false }: NotesFieldProps) {
     return readLocalStorage(NOTES_TITLE_KEY);
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const notesSaveTimeoutRef = useRef<number | null>(null);
+  const pendingNotesHtmlRef = useRef<string | null>(null);
 
   const calculateReadingTime = (text: string) => {
     const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
@@ -129,11 +171,13 @@ export function NotesField({ presentationMode = false }: NotesFieldProps) {
     extensions: [
       StarterKit,
     ],
-    content: '',
+    content: readLocalStorage(NOTES_STORAGE_KEY),
     editable: !presentationMode,
     onUpdate: ({ editor }) => {
       try {
-        writeLocalStorage(NOTES_STORAGE_KEY, editor.getHTML());
+        scheduleLocalStorageWrite(NOTES_STORAGE_KEY, editor.getHTML(), notesSaveTimeoutRef, pendingNotesHtmlRef, () => {
+          setError(t('notes.saveError'));
+        });
         calculateReadingTime(editor.getText());
       } catch (error) {
         console.error('Failed to save pitch notes to local storage:', error);
@@ -146,19 +190,23 @@ export function NotesField({ presentationMode = false }: NotesFieldProps) {
     editor?.setEditable(!presentationMode);
   }, [editor, presentationMode]);
 
-  // Load initial content on mount
   useEffect(() => {
-    if (editor && !editor.isDestroyed) {
-      try {
-        const savedContent = readLocalStorage(NOTES_STORAGE_KEY);
-        if (savedContent) {
-          editor.commands.setContent(savedContent);
-        }
-      } catch (error) {
-        console.error('Failed to read pitch notes from local storage:', error);
+    return () => {
+      if (notesSaveTimeoutRef.current !== null) {
+        window.clearTimeout(notesSaveTimeoutRef.current);
+        notesSaveTimeoutRef.current = null;
       }
-    }
-  }, [editor]);
+
+      if (pendingNotesHtmlRef.current !== null) {
+        try {
+          writeLocalStorage(NOTES_STORAGE_KEY, pendingNotesHtmlRef.current);
+        } catch {
+          // State updates are not useful during unmount; the last edit is already best-effort.
+        }
+        pendingNotesHtmlRef.current = null;
+      }
+    };
+  }, []);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newTitle = e.target.value;
@@ -224,13 +272,20 @@ export function NotesField({ presentationMode = false }: NotesFieldProps) {
         if (editor.getText().trim().length > 0 && currentContent !== content && !window.confirm(t('notes.replaceConfirm'))) {
           return;
         }
-        editor.commands.setContent(content);
+        const editorContent = isHtmlNotesFile(file) ? content : plainTextToEditorHtml(content);
+        editor.commands.setContent(editorContent);
         calculateReadingTime(editor.getText());
         try {
-          writeLocalStorage(NOTES_STORAGE_KEY, content);
+          if (notesSaveTimeoutRef.current !== null) {
+            window.clearTimeout(notesSaveTimeoutRef.current);
+            notesSaveTimeoutRef.current = null;
+            pendingNotesHtmlRef.current = null;
+          }
+
+          writeLocalStorage(NOTES_STORAGE_KEY, editor.getHTML());
           
           // Also set title based on filename if possible
-          const fileNameNoExt = file.name.replace(/\.[^/.]+$/, "");
+          const fileNameNoExt = file.name.replace(/\.[^/.]+$/, '');
           setPitchTitle(fileNameNoExt);
           writeLocalStorage(NOTES_TITLE_KEY, fileNameNoExt);
         } catch (error) {
@@ -268,6 +323,7 @@ export function NotesField({ presentationMode = false }: NotesFieldProps) {
             outline: 'none',
             color: 'var(--color-text-primary)'
           }}
+          aria-label={t('notes.title')}
         />
       </div>
       
@@ -282,6 +338,7 @@ export function NotesField({ presentationMode = false }: NotesFieldProps) {
         </div>
         <div className="notes-actions">
           <button
+            type="button"
             onClick={() => changePrompterFontScale(-0.1)}
             className="btn-outline"
             style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-xs)', display: 'flex', alignItems: 'center', gap: '4px' }}
@@ -291,6 +348,7 @@ export function NotesField({ presentationMode = false }: NotesFieldProps) {
             <Minus size={14} />
           </button>
           <button
+            type="button"
             onClick={() => changePrompterFontScale(0.1)}
             className="btn-outline"
             style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-xs)', display: 'flex', alignItems: 'center', gap: '4px' }}
@@ -300,6 +358,7 @@ export function NotesField({ presentationMode = false }: NotesFieldProps) {
             <Plus size={14} />
           </button>
           <button 
+            type="button"
             onClick={() => fileInputRef.current?.click()} 
             className="btn-outline" 
             style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-xs)', display: 'flex', alignItems: 'center', gap: '4px' }}
@@ -309,6 +368,7 @@ export function NotesField({ presentationMode = false }: NotesFieldProps) {
             <span>{t('notes.open')}</span>
           </button>
           <button 
+            type="button"
             onClick={handleSave} 
             className="btn-outline" 
             style={{ padding: 'var(--spacing-1) var(--spacing-2)', fontSize: 'var(--font-size-xs)', display: 'flex', alignItems: 'center', gap: '4px' }}

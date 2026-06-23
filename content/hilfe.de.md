@@ -10,7 +10,7 @@ Der PitchTimer hilft dir dabei, deine Präsentationen, insbesondere Elevator Pit
 4. **Präsentationsmodus:** Nutze den Button "Vollbild", um Ablenkungen zu minimieren. Im Präsentationsmodus fokussierst du dich ganz auf den Timer und deine Notizen.
 
 ## Export & Import
-Du kannst deine formatierten Notizen jederzeit über den **Speichern**-Button als `.html`-Datei herunterladen und über den **Öffnen**-Button wieder laden. Auch `.txt`- und `.md`-Dateien können geöffnet werden.
+Du kannst deine formatierten Notizen jederzeit über den **Speichern**-Button als `.html`-Datei herunterladen und über den **Öffnen**-Button wieder laden. Auch `.txt`- und `.md`-Dateien können als Klartext geöffnet werden.
 
 ## Verlauf
 Deine absolvierten Pitches werden im Verlauf protokolliert, damit du deine Fortschritte und tatsächlichen Zeiten überprüfen kannst. Auch diese Daten bleiben lokal auf deinem Gerät.

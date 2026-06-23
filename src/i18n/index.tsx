@@ -17,11 +17,30 @@ const translations: Record<Language, Translations> = { de, en };
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'pitchtimer_language';
+const SUPPORTED_LANGUAGES: Language[] = ['de', 'en'];
+
+function readStoredLanguage(): Language | null {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY) as Language | null;
+    return saved && SUPPORTED_LANGUAGES.includes(saved) ? saved : null;
+  } catch (error) {
+    console.error('Failed to read language from local storage:', error);
+    return null;
+  }
+}
+
+function writeStoredLanguage(language: Language) {
+  try {
+    localStorage.setItem(STORAGE_KEY, language);
+  } catch (error) {
+    console.error('Failed to save language to local storage:', error);
+  }
+}
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY) as Language;
-    if (saved && ['de', 'en'].includes(saved)) {
+    const saved = readStoredLanguage();
+    if (saved) {
       return saved;
     }
     const browserLang = navigator.language.startsWith('de') ? 'de' : 'en';
@@ -29,7 +48,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   });
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, language);
+    writeStoredLanguage(language);
     document.documentElement.lang = language;
   }, [language]);
 

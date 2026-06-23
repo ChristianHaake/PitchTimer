@@ -5,9 +5,14 @@ export const de = {
   'app.about': 'Über',
   'app.privacy': 'Datenschutz',
   'app.imprint': 'Impressum',
+  'app.clearData': 'Lokale Daten löschen',
+  'app.clearDataConfirm': 'Alle lokal gespeicherten PitchTimer-Daten auf diesem Gerät löschen? Notizen, Titel, Verlauf und Einstellungen werden entfernt.',
   'app.source': 'Quellcode',
   'app.coffee': 'Kaffee spendieren',
   'content.back': 'Zurück zur App',
+  'content.loading': 'Inhalt wird geladen...',
+  'content.notFoundTitle': 'Seite nicht gefunden',
+  'content.notFoundBody': 'Diese Adresse gehört zu keiner PitchTimer-Seite.',
 
   // Home / General
   'home.title': 'Elevator Pitch üben',

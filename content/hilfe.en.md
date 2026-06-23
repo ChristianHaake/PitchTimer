@@ -10,7 +10,7 @@ PitchTimer helps you perfectly time your presentations, especially elevator pitc
 4. **Presentation Mode:** Use the "Fullscreen" button to minimize distractions. In presentation mode, you focus entirely on the timer and your notes.
 
 ## Export & Import
-You can download your formatted notes at any time as an `.html` file using the **Save** button, and load them back using the **Open** button. `.txt` and `.md` files can also be opened.
+You can download your formatted notes at any time as an `.html` file using the **Save** button, and load them back using the **Open** button. `.txt` and `.md` files can also be opened as plain text.
 
 ## History
 Your completed pitches are logged in the history section so you can track your progress and actual times. This data also remains locally on your device.

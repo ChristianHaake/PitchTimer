@@ -4,7 +4,7 @@ import { playBeep } from '../utils/audio';
 const STORAGE_KEY = 'pitchtimer_time_mode';
 const TIME_MODES = [30, 60, 90, 120] as const;
 const PREP_SECONDS = 3;
-const TICK_INTERVAL_MS = 100;
+const TICK_INTERVAL_MS = 250;
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);

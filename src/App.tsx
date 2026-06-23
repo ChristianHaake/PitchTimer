@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { MarkdownPage } from './MarkdownPage';
 import logoWideImg from './assets/logo-wide.png';
 import './index.css';
 
@@ -11,11 +10,25 @@ import { ProgressBar } from './components/ProgressBar';
 import { TimeSelector } from './components/TimeSelector';
 import { HistoryStats } from './components/HistoryStats';
 import { useWakeLock } from './hooks/useWakeLock';
+import { clearAllLocalData } from './utils/localData';
 
 import { Suspense, lazy, useState, useEffect, useCallback } from 'react';
 import { useTranslation } from './i18n';
 
 const NotesField = lazy(() => import('./components/NotesField').then((module) => ({ default: module.NotesField })));
+const MarkdownPage = lazy(() => import('./MarkdownPage').then((module) => ({ default: module.MarkdownPage })));
+
+function NotFound() {
+  const { t } = useTranslation();
+
+  return (
+    <div className="surface-panel" style={{ textAlign: 'left' }}>
+      <Link to="/" className="content-back-link">{t('content.back')}</Link>
+      <h1>{t('content.notFoundTitle')}</h1>
+      <p>{t('content.notFoundBody')}</p>
+    </div>
+  );
+}
 
 function Home() {
   const { t } = useTranslation();
@@ -121,6 +134,18 @@ function Home() {
 
 function App() {
   const { t, language, setLanguage } = useTranslation();
+  const loadHelpContent = useCallback(() => language === 'en' ? import('../content/hilfe.en.md?raw') : import('../content/hilfe.de.md?raw'), [language]);
+  const loadTeacherContent = useCallback(() => language === 'en' ? import('../content/lehrkraefte.en.md?raw') : import('../content/lehrkraefte.de.md?raw'), [language]);
+  const loadAboutContent = useCallback(() => language === 'en' ? import('../content/ueber.en.md?raw') : import('../content/ueber.de.md?raw'), [language]);
+  const loadPrivacyContent = useCallback(() => language === 'en' ? import('../content/datenschutz.en.md?raw') : import('../content/datenschutz.de.md?raw'), [language]);
+  const loadImprintContent = useCallback(() => language === 'en' ? import('../content/impressum.en.md?raw') : import('../content/impressum.de.md?raw'), [language]);
+
+  const handleClearLocalData = () => {
+    if (window.confirm(t('app.clearDataConfirm'))) {
+      clearAllLocalData();
+      window.location.reload();
+    }
+  };
 
   return (
     <Router>
@@ -163,14 +188,17 @@ function App() {
       </header>
 
       <main className="app-main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/hilfe" element={<MarkdownPage contentRawPromise={language === 'en' ? import('../content/hilfe.en.md?raw') : import('../content/hilfe.de.md?raw')} />} />
-          <Route path="/lehrkraefte" element={<MarkdownPage contentRawPromise={language === 'en' ? import('../content/lehrkraefte.en.md?raw') : import('../content/lehrkraefte.de.md?raw')} />} />
-          <Route path="/ueber" element={<MarkdownPage contentRawPromise={language === 'en' ? import('../content/ueber.en.md?raw') : import('../content/ueber.de.md?raw')} />} />
-          <Route path="/datenschutz" element={<MarkdownPage contentRawPromise={language === 'en' ? import('../content/datenschutz.en.md?raw') : import('../content/datenschutz.de.md?raw')} />} />
-          <Route path="/impressum" element={<MarkdownPage contentRawPromise={language === 'en' ? import('../content/impressum.en.md?raw') : import('../content/impressum.de.md?raw')} />} />
-        </Routes>
+        <Suspense fallback={<div className="surface-panel">{t('content.loading')}</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/hilfe" element={<MarkdownPage loadContentRaw={loadHelpContent} />} />
+            <Route path="/lehrkraefte" element={<MarkdownPage loadContentRaw={loadTeacherContent} />} />
+            <Route path="/ueber" element={<MarkdownPage loadContentRaw={loadAboutContent} />} />
+            <Route path="/datenschutz" element={<MarkdownPage loadContentRaw={loadPrivacyContent} />} />
+            <Route path="/impressum" element={<MarkdownPage loadContentRaw={loadImprintContent} />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
 
       <footer className="app-footer hide-in-presentation">
@@ -179,6 +207,9 @@ function App() {
           <Link to="/ueber" className="header-link">{t('app.about')}</Link>
           <Link to="/datenschutz" className="header-link">{t('app.privacy')}</Link>
           <Link to="/impressum" className="header-link">{t('app.imprint')}</Link>
+          <button type="button" onClick={handleClearLocalData} className="footer-button-link">
+            {t('app.clearData')}
+          </button>
           
           <a href="https://www.buymeacoffee.com/Haake" target="_blank" rel="noopener noreferrer" className="bmc-link" aria-label="Buy me a coffee">
             <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

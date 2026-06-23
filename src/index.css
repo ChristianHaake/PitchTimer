@@ -164,6 +164,20 @@ body {
   color: var(--color-text-primary);
 }
 
+.footer-button-link {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font: inherit;
+  padding: var(--spacing-2);
+}
+
+.footer-button-link:hover {
+  color: var(--color-text-primary);
+  text-decoration: underline;
+}
+
 @media (max-width: 600px) {
   .app-header {
     flex-direction: column;
@@ -190,6 +204,7 @@ body {
   color: white;
   border: none;
   border-radius: var(--radius-sm);
+  min-height: 44px;
   padding: var(--spacing-2) var(--spacing-4);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
@@ -205,6 +220,7 @@ body {
   color: var(--color-text-primary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
+  min-height: 44px;
   padding: var(--spacing-2) var(--spacing-4);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
@@ -220,6 +236,7 @@ body {
   color: var(--color-text-primary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
+  min-height: 44px;
   padding: var(--spacing-2) var(--spacing-4);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
@@ -232,7 +249,9 @@ body {
 
 button:focus-visible,
 a:focus-visible,
-textarea:focus-visible {
+textarea:focus-visible,
+input:focus-visible,
+[contenteditable="true"]:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
@@ -530,7 +549,9 @@ body.presentation-mode .ProseMirror:focus {
   background: transparent;
   border: none;
   border-radius: var(--radius-sm);
-  padding: var(--spacing-1);
+  min-height: 36px;
+  min-width: 36px;
+  padding: var(--spacing-2);
   cursor: pointer;
   color: var(--color-text-secondary);
   display: flex;

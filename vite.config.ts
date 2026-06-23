@@ -1,6 +1,20 @@
+import { readFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vitest/config'
+
+function productionContentSecurityPolicy(): string {
+  const headersPath = resolve(dirname(fileURLToPath(import.meta.url)), 'public/_headers')
+  const match = readFileSync(headersPath, 'utf8').match(/^\s*Content-Security-Policy:\s*(.+)$/m)
+
+  if (!match) {
+    throw new Error(`Content-Security-Policy not found in ${headersPath}`)
+  }
+
+  return match[1].trim()
+}
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -48,15 +62,20 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,svg,webmanifest}'],
         navigateFallback: '/index.html',
         cleanupOutdatedCaches: true,
         clientsClaim: true,
       },
     }),
   ],
+  preview: {
+    headers: {
+      'Content-Security-Policy': productionContentSecurityPolicy().replace(/;\s*upgrade-insecure-requests\s*/i, ''),
+    },
+  },
   test: {
     environment: 'jsdom',
-    include: ['src/**/*.test.ts'],
+    include: ['src/**/*.test.{ts,tsx}'],
   },
 })

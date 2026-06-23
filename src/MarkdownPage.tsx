@@ -4,18 +4,26 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from './i18n';
 
 interface MarkdownPageProps {
-  contentRawPromise: Promise<typeof import('*.md?raw')>;
+  loadContentRaw: () => Promise<typeof import('*.md?raw')>;
 }
 
-export function MarkdownPage({ contentRawPromise }: MarkdownPageProps) {
+export function MarkdownPage({ loadContentRaw }: MarkdownPageProps) {
   const { t } = useTranslation();
   const [content, setContent] = useState<string>('');
 
   useEffect(() => {
-    contentRawPromise.then((mod) => {
-      setContent(mod.default);
+    let cancelled = false;
+
+    loadContentRaw().then((mod) => {
+      if (!cancelled) {
+        setContent(mod.default);
+      }
     });
-  }, [contentRawPromise]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [loadContentRaw]);
 
   return (
     <div className="surface-panel" style={{ textAlign: 'left' }}>

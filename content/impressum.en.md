@@ -1,12 +1,23 @@
 # Imprint
 
-## Information according to § 5 TMG
+## Information according to § 5 DDG
 
-Christian Haake
-(Address to be added if needed)
+Christian Haake  
+Alte Ziegelei 7  
+26197 Großenkneten  
+Germany
 
 ## Contact
+Email: {first name}{last name}@gmail.com
+
 Project Repository: https://github.com/ChristianHaake/PitchTimer
+
+## Responsible for content according to § 18 (2) MStV
+
+Christian Haake  
+Alte Ziegelei 7  
+26197 Großenkneten  
+Germany
 
 ## Liability for Content
 As a service provider, we are responsible for our own content on these pages in accordance with general laws pursuant to § 7 (1) TMG. The content of this website has been created with the greatest possible care. However, we cannot guarantee the accuracy, completeness, or timeliness of the content.

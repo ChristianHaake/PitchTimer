@@ -15,7 +15,7 @@ Record release-specific results below.
 
 - [ ] Shared checklist completed.
 - [x] Automated verification passed.
-- [ ] Mobile and tablet workflow tested.
+- [x] Mobile and tablet workflow tested.
 - [ ] Import, export, reset, and recovery tested.
 - [ ] Legal and privacy content reviewed.
 - [ ] Exceptions documented.
@@ -23,8 +23,13 @@ Record release-specific results below.
 ## Notes
 
 - Automated verification covers typecheck, lint, Vitest unit tests, and build.
-- Manual browser spot-check covered desktop and 320px mobile layout during the
-  2026-06-17 implementation pass.
-- Legal text still needs operator review before release.
+- Manual browser spot-check covered desktop, 320px mobile, 390px mobile, and
+  768px tablet layout during the 2026-06-21 implementation pass.
+- Browser smoke checks covered notes reload persistence, HTML import
+  normalization, `.txt` literal import handling, timer completion history,
+  clear-local-data removal of user content keys, and unknown-route rendering.
+- Imprint operator address and responsible-content data were copied from
+  `ChristianHaake/Feedbackbogen-Generator`; formal legal/privacy review remains
+  open before release.
 - Full tablet workflow, installability, offline behavior, and screen-reader
   checks still need manual release testing.

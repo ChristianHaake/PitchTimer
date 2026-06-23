@@ -61,6 +61,9 @@ Persisted state uses namespaced `localStorage` keys:
 versioned v1 format. Invalid history records are discarded before rendering.
 Unsupported future versions are rejected by returning an empty history.
 
+The footer clear-local-data action removes every PitchTimer-owned
+`localStorage` key listed above and reloads the app.
+
 ## Project Files
 
 PitchTimer does not have a full editable project format. Notes can be exported
@@ -68,9 +71,13 @@ and imported as HTML files:
 
 - export extension: `.html`
 - import extensions: `.txt`, `.md`, `.html`
+- `.txt` and `.md` imports are treated as literal text; `.html` imports are
+  parsed by the editor
 - export media type: `text/html;charset=utf-8`
 - maximum import size: 100 KB
 - replacement of non-empty notes requires confirmation
+- imported HTML is persisted from the normalized editor document, not the raw
+  file bytes
 - failed imports preserve current notes
 
 ## Network and Privacy

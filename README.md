@@ -14,6 +14,7 @@ Live application: [https://pitchtimer.haak3.de](https://pitchtimer.haak3.de)
 - fullscreen presentation mode with read-only prompter view
 - local rich-text notes with `.html` export and `.txt`, `.md`, or `.html` import
 - local history of the latest pitch runs
+- one-click clearing of locally stored notes, history, and settings
 - German and English interface
 - installable Progressive Web App with offline app-shell caching
 - help, about, privacy, imprint, and source links
@@ -34,6 +35,10 @@ The app stores these values locally in `localStorage`:
 
 Notes can be exported as an HTML file and imported again. Imported note files
 are limited to 100 KB and replace existing notes only after confirmation.
+`.txt` and `.md` imports are treated as literal text; `.html` imports are
+normalized through the editor before being stored.
+The footer action "Clear local data" removes all PitchTimer `localStorage`
+values on the current device and reloads the app.
 
 The production site is served as a static web app with security headers in
 `public/_headers`.

@@ -30,5 +30,9 @@ Review date:
   no full project archive because the current editable data model is
   intentionally just notes, timer preset, language, prompter text size, and
   compact history.
+- Imported notes are persisted from the normalized editor document rather than
+  raw imported file bytes.
+- The app includes a clear-local-data action for all PitchTimer-owned browser
+  storage keys.
 - The app is a PWA for installability and offline app-shell access. It does not
   add runtime network features.

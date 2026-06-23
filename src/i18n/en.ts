@@ -5,9 +5,14 @@ export const en = {
   'app.about': 'About',
   'app.privacy': 'Privacy',
   'app.imprint': 'Imprint',
+  'app.clearData': 'Clear local data',
+  'app.clearDataConfirm': 'Delete all locally stored PitchTimer data on this device? Notes, title, history, and settings will be removed.',
   'app.source': 'Source Code',
   'app.coffee': 'Buy me a coffee',
   'content.back': 'Back to app',
+  'content.loading': 'Loading content...',
+  'content.notFoundTitle': 'Page not found',
+  'content.notFoundBody': 'This address does not match a PitchTimer page.',
 
   // Home / General
   'home.title': 'Practice Elevator Pitch',

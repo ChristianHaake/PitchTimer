@@ -1,8 +1,9 @@
 {
   "name": "pitchtimer",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Browser-based training tool for elevator pitches and short presentations.",
+  "license": "GPL-3.0-only",
   "type": "module",
   "engines": {
     "node": ">=20.0.0"

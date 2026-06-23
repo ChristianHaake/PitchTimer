@@ -1,12 +1,23 @@
 # Impressum
 
-## Angaben gemäß § 5 TMG
+## Angaben gemäß § 5 DDG
 
-Christian Haake
-(Anschrift bitte bei Bedarf eintragen)
+Christian Haake  
+Alte Ziegelei 7  
+26197 Großenkneten  
+Deutschland
 
 ## Kontakt
+E-Mail: {mein Vorname}{mein Nachname}@gmail.com
+
 Projekt-Repository: https://github.com/ChristianHaake/PitchTimer
+
+## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
+
+Christian Haake  
+Alte Ziegelei 7  
+26197 Großenkneten  
+Deutschland
 
 ## Haftung für Inhalte
 Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.

@@ -24,10 +24,12 @@ export function ProgressBar({ progress, label = 'Timer progress' }: ProgressBarP
       <div 
         className="progress-fill"
         style={{
-          width: `${progress}%`,
+          width: '100%',
           height: '100%',
           backgroundColor: 'var(--color-primary)',
-          transition: 'width 1s linear'
+          transform: `scaleX(${progress / 100})`,
+          transformOrigin: 'left center',
+          transition: 'transform 1s linear'
         }}
       />
     </div>
